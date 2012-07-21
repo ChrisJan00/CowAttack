@@ -7,8 +7,9 @@ Image {
 
     property bool pasturing: false
     property int pastureAmount: 0
-    property int pastureMax: 100
+    property int pastureMax: 300
     property int pastureInc: 1
+    property int pastureAcc: 1
 
     Rectangle {
         border.width: 1
@@ -16,14 +17,14 @@ Image {
         color: "purple"
         visible: pastureAmount > 0
         width: pastureAmount / pastureMax * cow.width
-        height: 3
-        y : -4
+        height: 4
+        y : -8
         Rectangle {
             border.width: 1
             border.color: "black"
             color: "transparent"
             width: cow.width
-            height: 3
+            height: parent.height
         }
     }
 
@@ -32,6 +33,8 @@ Image {
         running: true
         repeat: true
         onTriggered: if (pasturing) {
+                pastureInc += pastureAcc;
+                pastureAcc += 0.1;
                 if (pastureAmount < pastureMax)
                     pastureAmount += Math.min(pastureInc, pastureMax-pastureAmount);
                 if (pastureAmount >= pastureMax)

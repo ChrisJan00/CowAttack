@@ -13,6 +13,9 @@ Item {
     property int floatHeight: 150
     property bool cowSpawned: false
 
+    property int energy: 0
+    property int energyMax: 1000
+
     Connections {
         target: spaceshipManager
         onMoveScout: {
@@ -158,6 +161,7 @@ Item {
         ScriptAction {
             script: {
                 beam.opacity = 0;
+                cow.pastureAcc = 0;
                 cow.pasturing = true;
             }
         }
@@ -199,6 +203,10 @@ Item {
                 cow.x = shipPic.width / 2 - cow.width / 2
                 cow.y = shipPic.height
                 beam.opacity = 0;
+                energy += cow.pastureAmount
+                if (energy > energyMax)
+                    energy = energyMax
+                cow.pastureAmount = 0;
             }
         }
     }
@@ -219,5 +227,22 @@ Item {
             return;
         cowSpawned = false;
         retrieveAnimation.start();
+    }
+
+    Rectangle {
+        border.width: 1
+        border.color: "black"
+        color: "purple"
+        visible: energy > 0
+        width: energy / energyMax * scout.width
+        height: 4
+        y : -8 - floatHeight
+        Rectangle {
+            border.width: 1
+            border.color: "black"
+            color: "transparent"
+            width: scout.width
+            height: parent.height
+        }
     }
 }
