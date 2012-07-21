@@ -21,4 +21,8 @@ Rectangle {
     }
 
 
+    SpaceshipManager {
+        anchors.fill: parent
+    }
+
 }

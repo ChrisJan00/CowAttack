@@ -2,6 +2,11 @@
 import QtQuick 1.1
 
 Rectangle {
-    width: 100
-    height: 62
+    width: 50
+    height: 30
+    color: "purple"
+    x: parent.width / 2 - width/2
+    y: 4
+    function update() {
+    }
 }
