@@ -158,6 +158,7 @@ Item {
         ScriptAction {
             script: {
                 beam.opacity = 0;
+                cow.pasturing = true;
             }
         }
     }
@@ -167,6 +168,7 @@ Item {
         ScriptAction {
             script: {
                 beam.opacity = 1;
+                cow.pasturing = false;
             }
         }
         ParallelAnimation {
