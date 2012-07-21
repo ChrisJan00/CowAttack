@@ -66,4 +66,10 @@ Rectangle {
         id: loseScreen
     }
 
+    WinScreen {
+        id: winScreen
+    }
+
+
+
 }
