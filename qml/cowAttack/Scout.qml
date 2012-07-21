@@ -51,8 +51,9 @@ Item {
     Image {
         id: shadow
         source: "../../gfx/cowscoutshadow-38x24-left.png"
-        width: parent.width
-        height: parent.height
+//        width: parent.width
+//        height: parent.height
+        y: height/2
         opacity: Math.max(0, Math.min(1, (scout.y - grass.y)/50));
     }
 
@@ -166,6 +167,9 @@ Item {
                 beam.opacity = 0;
                 cow.pastureAcc = 0;
                 cow.pasturing = true;
+                cowPositions.get(scoutIndex).active = true;
+                cowPositions.get(scoutIndex).x = scout.x;
+                cowPositions.get(scoutIndex).y = scout.y;
             }
         }
     }
@@ -176,6 +180,7 @@ Item {
             script: {
                 beam.opacity = 1;
                 cow.pasturing = false;
+                cowPositions.get(scoutIndex).active = false;
             }
         }
         ParallelAnimation {
@@ -233,12 +238,12 @@ Item {
     }
 
     Rectangle {
-        border.width: 1
+        border.width: 0
         border.color: "black"
         color: "purple"
         visible: energy > 0
         width: energy / energyMax * scout.width
-        height: 4
+        height: 6
         y : -8 - floatHeight
         Rectangle {
             border.width: 1

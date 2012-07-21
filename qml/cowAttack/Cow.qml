@@ -12,7 +12,7 @@ Image {
     property int pastureAcc: 1
 
     Rectangle {
-        border.width: 1
+        border.width: 0
         border.color: "black"
         color: "purple"
         visible: pastureAmount > 0

@@ -53,13 +53,13 @@ Item {
     }
 
     Rectangle {
-        border.width: 1
+        border.width: 0
         border.color: "black"
         color: "purple"
         visible: milk > 0
         width: milk / milkMax * mothership.width
-        height: 4
-        y : -4
+        height: 8
+        y : -8
         Rectangle {
             border.width: 1
             border.color: "black"
