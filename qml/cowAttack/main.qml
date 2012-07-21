@@ -27,4 +27,8 @@ Rectangle {
         anchors.fill: parent
     }
 
+
+    AliensManager {
+        anchors.fill: parent
+    }
 }

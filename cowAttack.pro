@@ -7,6 +7,7 @@ DEPLOYMENTFOLDERS = folder_01
 QML_IMPORT_PATH =
 
 symbian:TARGET.UID3 = 0xE258663B
+#macx: CONFIG -= app_bundle
 
 # Smart Installer package's UID
 # This UID is from the protected range and therefore the package will
@@ -36,9 +37,9 @@ SOURCES += main.cpp
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
-OTHER_FILES += \
-    qml/cowAttack/alien.qml \
-    qml/cowAttack/cow.qml \
-    qml/cowAttack/mothership.qml \
-    qml/cowAttack/scout.qml \
-    qml/cowAttack/spaceshipManager.qml \
+#OTHER_FILES += \
+#    qml/cowAttack/alien.qml \
+#    qml/cowAttack/cow.qml \
+#    qml/cowAttack/mothership.qml \
+#    qml/cowAttack/scout.qml \
+#    qml/cowAttack/spaceshipManager.qml \
