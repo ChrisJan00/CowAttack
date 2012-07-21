@@ -54,9 +54,6 @@ Rectangle {
     }
 
 
-
-
-
     AliensManager {
         anchors.fill: parent
     }
@@ -64,4 +61,15 @@ Rectangle {
     SpaceshipManager {
         anchors.fill: parent
     }
+
+    LoseScreen {
+        id: loseScreen
+    }
+
+    WinScreen {
+        id: winScreen
+    }
+
+
+
 }

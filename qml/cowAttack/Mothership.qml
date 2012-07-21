@@ -9,8 +9,10 @@ Item {
     property int milk: 0
     property int milkMax: 7000
 
-    onMilkChanged: if (milk > milkMax)
+    onMilkChanged: if (milk > milkMax) {
                        milk = milkMax;
+                       winScreen.show();
+                   }
 
     Image {
         id: motherPic

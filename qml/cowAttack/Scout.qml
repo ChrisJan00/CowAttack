@@ -314,6 +314,7 @@ Item {
         ScriptAction {
             script: {
                 scout.visible = false;
+                spaceshipManager.liveScoutCount--;
             }
         }
     }

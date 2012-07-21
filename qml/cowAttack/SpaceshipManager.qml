@@ -36,6 +36,11 @@ Item {
     }
 
     property int scoutCount: 3
+    property int liveScoutCount: scoutCount
+    onLiveScoutCountChanged: {
+        if (liveScoutCount == 0)
+            loseScreen.show();
+    }
 
     // scouts
     Repeater {
