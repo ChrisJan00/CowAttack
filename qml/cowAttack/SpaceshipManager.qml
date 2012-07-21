@@ -4,10 +4,14 @@ import QtQuick 1.1
 Item {
     id: spaceshipManager
 
-    property int selectedScoutIndex: -1
+    property int selectedScoutIndex: 0
+
+    property alias mothershipX: motherShip.x
+    property alias mothershipY: motherShip.y
 
     signal moveScout
     signal updateSpaceships
+    signal recallShip
     property int destX
     property int destY
 
@@ -42,8 +46,6 @@ Item {
             destY: y
         }
     }
-
-
 
     Timer {
         running: true
