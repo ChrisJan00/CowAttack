@@ -35,7 +35,7 @@ Changes (by Christiaan Janssen):
  - cowscoutshadow
 License of changes: Creative Commons Attribution 3.0 Universal <http://creativecommons.org/licenses/by/3.0/>
 
-Cow Attack Original Graphics
+Cow Attack Original Graphics and Sound Effects
 Copyright of changes 2012 Iwan Gabovitch <qubodup@gmail.com> <http://twitter.com/qubodup> <http://qubodup.net>
 License: CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0/>
  - beam
@@ -44,3 +44,4 @@ License: CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0/>
  - lasershot
  - drop (milk)
  - backgroundover screens
+ - all sounds
