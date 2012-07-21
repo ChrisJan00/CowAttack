@@ -3,22 +3,35 @@ import QtQuick 1.1
 
 Rectangle {
     id: scout
-    width: 20
-    height: 20
+    width: 64
+    height: 64
     color: "gray"
 
     property int scoutIndex: 0
     property bool selected: spaceshipManager.selectedScoutIndex == scoutIndex
+    property int destX
+    property int destY
 
     Connections {
         target: spaceshipManager
         onMoveScout: {
             if (selected) {
-                x = spaceshipManager.destX;
-                y = spaceshipManager.destY;
+                destX = spaceshipManager.destX;
+                destY = spaceshipManager.destY;
             }
         }
+
+        onUpdateSpaceships: {
+            var stepSize = 10
+            var incx = Math.min(stepSize, Math.max(-stepSize, destX - x) );
+            var incy = Math.min(stepSize, Math.max(-stepSize, destY - y) );
+            x += incx;
+            y += incy;
+        }
     }
+
+    Behavior on x { NumberAnimation { duration: heartBeat } }
+    Behavior on y { NumberAnimation { duration: heartBeat } }
 
     Rectangle {
         anchors.fill: parent

@@ -5,6 +5,8 @@ Rectangle {
     width: 500
     height: 700
 
+    property int heartBeat: 100
+
     Rectangle {
         id: sky
         color: "blue"

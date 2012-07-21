@@ -6,13 +6,13 @@ Project {
 
     /* Include .qml, .js, and image files from current directory and subdirectories */
     QmlFiles {
-        directory: "qml/cowAttack/."
+        directory: "./qml/cowAttack"
     }
     JavaScriptFiles {
         directory: "."
     }
     ImageFiles {
-        directory: "./pics"
+        directory: "./gfx"
     }
     /* List of plugin directories passed to QML runtime */
     // importPaths: [ "../exampleplugin" ]

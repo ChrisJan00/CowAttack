@@ -7,23 +7,13 @@ Item {
     property int selectedScoutIndex: -1
 
     signal moveScout
+    signal updateSpaceships
     property int destX
     property int destY
 
     // mothership
     Mothership {
         id: motherShip
-    }
-    property int scoutCount: 2
-
-    // scouts
-    Repeater {
-        model: scoutCount
-        delegate: Scout {
-            scoutIndex: index
-            x: index * 40
-            y: 100
-        }
     }
 
     MouseArea {
@@ -37,5 +27,28 @@ Item {
             destY = mouseY + y;
             moveScout();
         }
+    }
+
+    property int scoutCount: 2
+
+    // scouts
+    Repeater {
+        model: scoutCount
+        delegate: Scout {
+            scoutIndex: index
+            x: index * 40
+            y: 100
+            destX: x
+            destY: y
+        }
+    }
+
+
+
+    Timer {
+        running: true
+        repeat: true
+        onTriggered: updateSpaceships();
+        interval: heartBeat
     }
 }
