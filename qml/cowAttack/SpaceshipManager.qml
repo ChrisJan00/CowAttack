@@ -41,7 +41,7 @@ Item {
         delegate: Scout {
             scoutIndex: index
             x: index * 40
-            y: 100
+            y: 250
             destX: x
             destY: y
         }

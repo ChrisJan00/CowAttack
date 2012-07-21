@@ -10,12 +10,13 @@ Item {
     property bool selected: spaceshipManager.selectedScoutIndex == scoutIndex
     property int destX
     property int destY
-    property int floatHeight: 100
+    property int floatHeight: 150
+    property bool cowSpawned: false
 
     Connections {
         target: spaceshipManager
         onMoveScout: {
-            if (selected) {
+            if (selected && !cowSpawned) {
                 destX = spaceshipManager.destX;
                 destY = spaceshipManager.destY;
             }
@@ -30,7 +31,7 @@ Item {
         }
 
         onRecallShip: {
-            if (selected) {
+            if (selected && !cowSpawned) {
                 destX = mothershipX
                 destY = mothershipY + floatHeight
             }
@@ -61,7 +62,13 @@ Item {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                spaceshipManager.selectedScoutIndex = scoutIndex
+                if (!selected) {
+                    spaceshipManager.selectedScoutIndex = scoutIndex
+                } else if (!cowSpawned) {
+                        deployCow();
+                } else {
+                        retrieveCow();
+                }
             }
         }
 
@@ -100,5 +107,88 @@ Item {
     }
 
     function update() {
+    }
+
+    Cow {
+        id: cow
+        x: 0
+        y: 0
+        visible: false
+    }
+
+    SequentialAnimation {
+        id: deployAnimation
+        ScriptAction {
+            script: {
+                cow.opacity = 0;
+                cow.visible = true;
+                cow.x = shipPic.width / 2 - cow.width / 2
+                cow.y = shipPic.height - floatHeight
+            }
+        }
+        ParallelAnimation {
+            PropertyAnimation {
+                target: cow
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 500
+            }
+            PropertyAnimation {
+                target: cow
+                property: "y"
+                from: shipPic.height - floatHeight
+                to: 0
+                easing.type: Easing.InCubic
+                duration: 1500
+            }
+        }
+    }
+
+    SequentialAnimation {
+        id: retrieveAnimation
+        ParallelAnimation {
+            SequentialAnimation {
+                PauseAnimation { duration: 1000 }
+            PropertyAnimation {
+                target: cow
+                property: "opacity"
+                from: 1
+                to: 0
+                duration: 500
+            }
+            }
+            PropertyAnimation {
+                target: cow
+                property: "y"
+                from: 0
+                to: shipPic.height - floatHeight
+                easing.type: Easing.InCubic
+                duration: 1500
+            }
+        }
+
+        ScriptAction {
+            script: {
+                cow.opacity = 0;
+                cow.visible = true;
+                cow.x = shipPic.width / 2 - cow.width / 2
+                cow.y = shipPic.height
+            }
+        }
+    }
+
+    function deployCow() {
+        if (scout.y < grass.y)
+            return;
+        if (destX != x || destY != y)
+            return;
+        cowSpawned = true;
+        deployAnimation.start();
+    }
+
+    function retrieveCow() {
+        cowSpawned = false;
+        retrieveAnimation.start();
     }
 }
