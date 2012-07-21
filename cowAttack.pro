@@ -5,11 +5,12 @@ folder_02.source = gfx
 folder_02.target = .
 DEPLOYMENTFOLDERS = folder_01 folder_02
 
+QT += declarative
+
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
 symbian:TARGET.UID3 = 0xE258663B
-#macx: CONFIG -= app_bundle
 
 # Smart Installer package's UID
 # This UID is from the protected range and therefore the package will
