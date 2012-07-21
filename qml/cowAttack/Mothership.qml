@@ -6,15 +6,18 @@ Item {
     x: parent.width / 2 - width/2
     width: motherPic.width
 
-    property int milk
-    property int milkMax
+    property int milk: 0
+    property int milkMax: 7000
+
+    onMilkChanged: if (milk > milkMax)
+                       milk = milkMax;
 
     Image {
         id: motherPic
         y: incy
         property int incy
 
-        source: "../../gfx/cowmothership-54x38.png"
+        source: "../../gfx/cowmothership3-256x138.png"
         function update() {
         }
 
@@ -56,7 +59,7 @@ Item {
         visible: milk > 0
         width: milk / milkMax * mothership.width
         height: 4
-        y : -8
+        y : -4
         Rectangle {
             border.width: 1
             border.color: "black"

@@ -6,8 +6,9 @@ Item {
 
     property int selectedScoutIndex: 0
 
-    property alias mothershipX: motherShip.x
-    property alias mothershipY: motherShip.y
+    property int mothershipX: motherShip.x + motherShip.width / 2 - 28
+    property int mothershipY: motherShip.y + motherShip.height / 2 + 100 - 26
+    property alias motherMilk: motherShip.milk
 
     signal moveScout
     signal updateSpaceships
