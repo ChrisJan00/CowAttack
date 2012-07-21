@@ -2,16 +2,23 @@
 import QtQuick 1.1
 
 Rectangle {
-    width: 360
-    height: 360
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
+    width: 400
+    height: 600
+
+    Rectangle {
+        id: sky
+        color: "blue"
+        width: parent.width
+        height: 200
     }
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            Qt.quit();
-        }
+
+    Rectangle {
+        id: grass
+        color: "green"
+        width: parent.width
+        anchors.top: sky.bottom
+        anchors.bottom: parent.bottom
     }
+
+
 }
