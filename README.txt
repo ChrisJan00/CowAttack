@@ -8,7 +8,7 @@ License & Authors
 Art and code have different licenses.
 
 Cow Attack Code
-Copyright 2012 Christiaan Janssen and PLEASEENTERHERE
+Copyright 2012 Christiaan Janssen and Aurindam Jana
 
 Cow Attack Simerion Graphics
 Copyright 2012 Yoann Sculo <yoann.sculo @ gmail .com> <http://twitter.com/yoannsculo> <http://yoannsculo.fr>
