@@ -20,8 +20,9 @@ Changes (by Iwan Gabovitch):
  - cow is a bit thinner and has longer legs
  - cow eat animations have the mouth changing shape and add some grass in the mouth
  - cow step animations have the legs slightly deformed
- - grass is color modified and a bit shorter
+ - grass and grassdry are color modified and a bit shorter
  - surface is a color-modified and 'rectanglified' sand ground tile
+ - surfacered is surface with GIMP/Colors/Hue-Saturation Overlap=0,Hue=-7,Lightness=-23,Saturation=21 applied
  - cowscout and cowmothership are 'enginered' cows fit for space and air travel
  - cowmothership2 and cowmothership3 is based on a building with a glass dome, cow head and cow's colors
  - icons are mix-ups of above images
@@ -34,3 +35,4 @@ License: CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0/>
  - beam
  - beamsimple
  - sky
+ - lasershot
