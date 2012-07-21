@@ -35,7 +35,7 @@ License: CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0/>
  - beam
  - beamsimple
  - sky
- - lasershot
 
 Following images are too simple to be protected by copyright
  - cowscoutshadow
+ - lasershot
