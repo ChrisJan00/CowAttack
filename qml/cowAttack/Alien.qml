@@ -7,6 +7,7 @@ Item {
     property int alienIndex;
     property int speedX: 0;
     property int speedY: 0;
+    property bool move: true;
 
     Image {
         id: sprite
@@ -15,6 +16,9 @@ Item {
     }
 
     function updatePosition() {
+        checkDistanceFromCowScouts();
+        if (!move)
+            return;
         x += speedX;
         y += speedY;
         rectifyPosition();
@@ -38,6 +42,26 @@ Item {
             y = aliensManager.topBound;
             speedY = -speedY;
         }
+    }
+
+    function checkDistanceFromCowScouts() {
+        var distanceToCowScout = aliensManager.thresholdDistance;
+        var nearestCow = -1;
+        for (var i = 0; i < cowPositions.count; ++i) {
+            var cowPosition = cowPositions.get(i);
+            if (cowPosition.active) {
+                var distance = Math.pow(cowPosition.x - x, 2) +
+                        Math.pow(cowPosition.y - y, 2);
+                if (distance < distanceToCowScout) {
+                    distanceToCowScout = distance
+                    nearestCow = i;
+                }
+            }
+        }
+        if (nearestCow >= 0)
+            move = false;
+        else
+            move = true;
     }
 
     Connections {
