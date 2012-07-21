@@ -10,12 +10,14 @@ Item {
     property int alienCount: 25
     property int arrayCount: 5
     property double alienSpeed: 1.5
-    property variant xPos: [0,125,250,375,500]
+    property variant xPos: [100,125,250,375,500]
     property variant yPos: [200,325,450,575,700]
     property int leftBound: 0
     property int rightBound: 500
     property int topBound: 200
     property int bottomBound: 700
+
+    property double thresholdDistance : 10000
     Timer {
         id: updateTimer
         interval: heartBeat; running: true; repeat: true
