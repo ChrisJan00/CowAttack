@@ -1,5 +1,6 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
+import Qt.labs.particles 1.0
 
 Item {
     id: alien
@@ -8,6 +9,7 @@ Item {
     property int speedX: 0;
     property int speedY: 0;
     property bool move: true;
+    property int victimCow: -1
 
     Image {
         id: sprite
@@ -58,8 +60,10 @@ Item {
                 }
             }
         }
-        if (nearestCow >= 0)
+        if (nearestCow >= 0) {
             move = false;
+            victimCow = nearestCow;
+        }
         else
             move = true;
     }
@@ -74,5 +78,44 @@ Item {
             speedX = -speedX;
             speedY = -speedY;
         }
+    }
+
+    Particles {
+        id: emitter
+        parent: root
+        width: 1
+        height: 1
+        source: "../../gfx/laser.png"
+        lifeSpan: 1000
+        count: 1
+        emissionRate: 0
+        angle: 0;
+        rotation: 0
+        angleDeviation: 0
+        velocity: 100
+    }
+
+    Timer {
+        running: !move
+        repeat: true
+        interval: 1000
+        onTriggered: {
+            if (!cowPositions.get(victimCow).active)
+                return;
+            emitter.x = x + width/2;
+            emitter.y = y + height/2;
+            emitter.rotation = getCowAngle(victimCow);
+            emitter.burst(1);
+        }
+    }
+
+    function getCowAngle(cowIndex)
+    {
+        var cowX = cowPositions.get(cowIndex).x + 24;
+        var cowY = cowPositions.get(cowIndex).y + 16;
+        if (cowX != x)
+            return Math.atan2(cowY - y - alien.width/2, cowX - x - alien.height/2) * 180/ Math.PI;
+        else
+            return cowY < y? 0 : 180;
     }
 }

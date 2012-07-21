@@ -2,6 +2,7 @@
 import QtQuick 1.1
 
 Rectangle {
+    id: root
     width: 500
     height: 700
 
