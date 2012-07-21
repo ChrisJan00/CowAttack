@@ -30,8 +30,9 @@ Changes (by Iwan Gabovitch):
  - cowfaceohno based on alien and cowfacehappy
 Copyright of changes 2012 Iwan Gabovitch <qubodup@gmail.com> <http://twitter.com/qubodup> <http://qubodup.net>
 License of changes: Creative Commons Attribution 3.0 Universal <http://creativecommons.org/licenses/by/3.0/>
-Changes (by Christiaan Janssen)
+Changes (by Christiaan Janssen):
  - cowhead
+ - cowscoutshadow
 License of changes: Creative Commons Attribution 3.0 Universal <http://creativecommons.org/licenses/by/3.0/>
 
 Cow Attack Original Graphics
@@ -40,7 +41,6 @@ License: CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0/>
  - beam
  - beamsimple
  - sky
-
-Following images are too simple to be protected by copyright
- - cowscoutshadow
  - lasershot
+ - drop (milk)
+ - backgroundover screens
