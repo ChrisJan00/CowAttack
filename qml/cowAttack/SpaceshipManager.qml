@@ -18,6 +18,7 @@ Item {
     // mothership
     Mothership {
         id: motherShip
+        y: 20
     }
 
     MouseArea {
@@ -33,15 +34,15 @@ Item {
         }
     }
 
-    property int scoutCount: 2
+    property int scoutCount: 3
 
     // scouts
     Repeater {
         model: scoutCount
         delegate: Scout {
             scoutIndex: index
-            x: index * 40
-            y: 250
+            x: 40 + index * 140
+            y: 200 + Math.random() * 100
             destX: x
             destY: y
         }
