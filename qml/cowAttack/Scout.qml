@@ -18,6 +18,8 @@ Item {
 
     property bool docked: x == mothershipX && y == (mothershipY + floatHeight)
 
+    property int lives: 5
+
     Connections {
         target: spaceshipManager
         onMoveScout: {
@@ -264,6 +266,54 @@ Item {
                 var inc = Math.min(10, energy);
                 motherMilk += inc;
                 energy -= inc;
+            }
+        }
+    }
+
+    Row {
+        spacing: 2
+        y: -20 - floatHeight
+        Repeater {
+            model: lives
+            delegate: Image {
+                width: 10
+                height: 10
+                source: "../../gfx/cowhead.png"
+            }
+        }
+    }
+
+    function die() {
+        if (selected)
+            spaceshipManager.selectedScoutIndex = -1;
+        crashAnimation.start();
+    }
+
+    SequentialAnimation {
+        id: crashAnimation
+        PauseAnimation { duration: 500 }
+        ParallelAnimation {
+            RotationAnimation {
+                target: shipPic
+                property: "rotation"
+                from: 0
+                to: -90
+                direction: RotationAnimation.Counterclockwise
+                duration: 2000
+                easing.type: Easing.InQuart
+            }
+            PropertyAnimation {
+                target: scout
+                property: "floatHeight"
+                to: 0
+                easing.type: Easing.InQuart
+                duration: 2000
+            }
+        }
+        PauseAnimation { duration: 500 }
+        ScriptAction {
+            script: {
+                scout.visible = false;
             }
         }
     }

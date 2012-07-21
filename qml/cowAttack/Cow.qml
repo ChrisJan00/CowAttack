@@ -10,6 +10,7 @@ Image {
     property int pastureMax: 300
     property int pastureInc: 1
     property int pastureAcc: 1
+    property bool dying: false
 
     Connections {
         target: root
@@ -47,7 +48,7 @@ Image {
         repeat: true
         onTriggered: if (pasturing) {
                 pastureInc += pastureAcc;
-                pastureAcc += 0.4;
+                pastureAcc += 0.3;
                 if (pastureAmount < pastureMax)
                     pastureAmount += Math.min(pastureInc, pastureMax-pastureAmount);
                 if (pastureAmount >= pastureMax)
@@ -92,6 +93,7 @@ Image {
                 cow.pastureAmount = 0;
                 cow.pasturing = false;
                 cow.rotation = 0;
+                cow.dying = false;
             }
         }
 
@@ -99,6 +101,12 @@ Image {
 
     function die()
     {
+        if (dying)
+           return;
+        dying = true;
+        scout.lives--;
         deathAnimation.start();
+        if (scout.lives == 0)
+            scout.die();
     }
 }

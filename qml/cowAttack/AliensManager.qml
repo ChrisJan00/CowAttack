@@ -7,7 +7,7 @@ Item {
 
     signal updateAlienPositions
 
-    property int alienCount: 25
+    property int alienCount: 16
     property int arrayCount: 5
     property double alienSpeed: 1.5
     property variant xPos: [100,125,250,375,500]
@@ -17,7 +17,7 @@ Item {
     property int topBound: 200
     property int bottomBound: 700
 
-    property double thresholdDistance : 2500
+    property double thresholdDistance : 4000
     Timer {
         id: updateTimer
         interval: heartBeat; running: true; repeat: true
