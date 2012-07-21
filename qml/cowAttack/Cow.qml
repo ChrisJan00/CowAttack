@@ -12,6 +12,8 @@ Image {
     property int pastureAcc: 1
     property bool dying: false
 
+    state: "normal"
+
     Connections {
         target: root
         onCowIsShot: {
@@ -108,5 +110,42 @@ Image {
         deathAnimation.start();
         if (scout.lives == 0)
             scout.die();
+    }
+
+    states: [
+        State {
+            name: "normal"
+            PropertyChanges {
+                target: cow
+                source: "../../gfx/cow-48x32-left.png"
+            }
+        },
+        State {
+            name: "chew1"
+            PropertyChanges {
+                target: cow
+                source: "../../gfx/cow-48x32-left-eat1.png"
+            }
+        },
+        State {
+            name: "chew2"
+            PropertyChanges {
+                target: cow
+                source: "../../gfx/cow-48x32-left-eat2.png"
+            }
+        }
+    ]
+
+    Timer {
+        running: true
+        repeat: true
+        interval: 350
+        onTriggered: if (pasturing) {
+                         if (cow.state == "chew1")
+                             cow.state = "chew2";
+                         else
+                             cow.state = "chew1";
+                     } else
+                         cow.state = "normal";
     }
 }
