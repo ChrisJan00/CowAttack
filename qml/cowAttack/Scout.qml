@@ -16,6 +16,8 @@ Item {
     property int energy: 0
     property int energyMax: 1000
 
+    property bool docked: x == mothershipX && y == (mothershipY + floatHeight)
+
     Connections {
         target: spaceshipManager
         onMoveScout: {
@@ -35,6 +37,7 @@ Item {
 
         onRecallShip: {
             if (selected && !cowSpawned) {
+            //if (selected && !cowSpawned && energy == energyMax) {
                 destX = mothershipX
                 destY = mothershipY + floatHeight
             }
@@ -243,6 +246,19 @@ Item {
             color: "transparent"
             width: scout.width
             height: parent.height
+        }
+    }
+
+    Timer {
+        interval: heartBeat
+        running: true
+        repeat: true
+        onTriggered: {
+            if (docked && energy > 0) {
+                var inc = Math.min(10, energy);
+                motherMilk += inc;
+                energy -= inc;
+            }
         }
     }
 }
