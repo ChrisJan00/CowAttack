@@ -19,6 +19,7 @@ Changes (by Iwan Gabovitch):
  - cow is a bit thinner and has longer legs
  - grass is color modified and a bit shorter
  - surface is a color-modified and 'rectanglified' sand ground tile
- - icons are mix-ups of above images and the 
+ - icons are mix-ups of above images
+ - cowscout is an 'enginered' cow
 Copyright of changes 2012 Iwan Gabovitch <qubodup@gmail.com> <http://twitter.com/qubodup> <http://qubodup.net>
 License of changes: Creative Commons Attribution 3.0 Universal <http://creativecommons.org/licenses/by/3.0/>
