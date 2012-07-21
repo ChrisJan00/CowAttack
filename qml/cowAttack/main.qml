@@ -2,8 +2,8 @@
 import QtQuick 1.1
 
 Rectangle {
-    width: 400
-    height: 600
+    width: 500
+    height: 700
 
     Rectangle {
         id: sky
