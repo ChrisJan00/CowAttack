@@ -11,6 +11,19 @@ Image {
     property int pastureInc: 1
     property int pastureAcc: 1
 
+    Connections {
+        target: root
+        onCowIsShot: {
+            if (root.whichCow == scoutIndex) {
+                pastureAmount -= 10;
+                pastureAcc = 0;
+                if (pastureAmount <= 0) {
+                    die();
+                }
+            }
+        }
+    }
+
     Rectangle {
         border.width: 0
         border.color: "black"
@@ -34,11 +47,58 @@ Image {
         repeat: true
         onTriggered: if (pasturing) {
                 pastureInc += pastureAcc;
-                pastureAcc += 0.1;
+                pastureAcc += 0.4;
                 if (pastureAmount < pastureMax)
                     pastureAmount += Math.min(pastureInc, pastureMax-pastureAmount);
                 if (pastureAmount >= pastureMax)
                     pasturing = false;
             }
+    }
+
+    SequentialAnimation {
+        id: deathAnimation
+        ParallelAnimation {
+            RotationAnimation {
+                target: cow
+                property: "rotation"
+                from: 0
+                to: 180
+                duration: 500
+            }
+            SequentialAnimation {
+                PropertyAnimation {
+                    target: cow
+                    property: "y"
+                    from: y
+                    to: y - 40
+                    easing.type: Easing.OutQuad
+                    duration: 250
+                }
+                PropertyAnimation {
+                    target: cow
+                    property: "y"
+                    from: y - 40
+                    to: y
+                    easing.type: Easing.InQuad
+                    duration: 250
+                }
+            }
+        }
+        ScriptAction {
+            script: {
+                cowPositions.get(scoutIndex).active = false;
+                cow.opacity = 0;
+                scout.cowSpawned = false;
+                cow.pastureAmount = 0;
+                cow.pasturing = false;
+                cow.rotation = 0;
+            }
+        }
+
+    }
+
+    function die()
+    {
+        deathAnimation.start();
     }
 }

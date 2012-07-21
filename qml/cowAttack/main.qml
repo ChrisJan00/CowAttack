@@ -9,6 +9,8 @@ Rectangle {
     property int heartBeat: 100
 
 
+    property int whichCow: -1
+    signal cowIsShot
     ListModel {
         id: cowPositions
         ListElement {
@@ -52,12 +54,14 @@ Rectangle {
     }
 
 
-    SpaceshipManager {
-        anchors.fill: parent
-    }
+
 
 
     AliensManager {
+        anchors.fill: parent
+    }
+
+    SpaceshipManager {
         anchors.fill: parent
     }
 }

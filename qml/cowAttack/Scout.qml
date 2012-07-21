@@ -74,6 +74,7 @@ Item {
 //        height: parent.height
         y: -floatHeight + incy
         property int incy: 0
+        z: 2
 
         Rectangle {
             anchors.fill: parent
@@ -168,8 +169,8 @@ Item {
                 cow.pastureAcc = 0;
                 cow.pasturing = true;
                 cowPositions.get(scoutIndex).active = true;
-                cowPositions.get(scoutIndex).x = scout.x;
-                cowPositions.get(scoutIndex).y = scout.y;
+                cowPositions.get(scoutIndex).x = scout.x + cow.width/2;
+                cowPositions.get(scoutIndex).y = scout.y + cow.height / 2;
             }
         }
     }

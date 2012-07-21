@@ -85,7 +85,7 @@ Item {
         parent: root
         width: 1
         height: 1
-        source: "../../gfx/laser.png"
+        source: "../../gfx/lasershot-3x1.png"
         lifeSpan: 1000
         count: 1
         emissionRate: 0
@@ -106,13 +106,15 @@ Item {
             emitter.y = y + height/2;
             emitter.rotation = getCowAngle(victimCow);
             emitter.burst(1);
+            root.whichCow = victimCow
+            root.cowIsShot();
         }
     }
 
     function getCowAngle(cowIndex)
     {
-        var cowX = cowPositions.get(cowIndex).x + 24;
-        var cowY = cowPositions.get(cowIndex).y + 16;
+        var cowX = cowPositions.get(cowIndex).x;
+        var cowY = cowPositions.get(cowIndex).y;
         if (cowX != x)
             return Math.atan2(cowY - y - alien.width/2, cowX - x - alien.height/2) * 180/ Math.PI;
         else

@@ -17,7 +17,7 @@ Item {
     property int topBound: 200
     property int bottomBound: 700
 
-    property double thresholdDistance : 10000
+    property double thresholdDistance : 2500
     Timer {
         id: updateTimer
         interval: heartBeat; running: true; repeat: true
