@@ -36,8 +36,8 @@ SOURCES += main.cpp
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
-OTHER_FILES += \
-    alien.qml \
-    cow.qml \
-    mothership.qml \
-    scout.qml
+#OTHER_FILES += \
+#    alien.qml \
+#    cow.qml \
+#    mothership.qml \
+#    scout.qml
