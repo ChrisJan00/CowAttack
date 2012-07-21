@@ -3,13 +3,14 @@ import QtQuick 1.1
 
 Item {
     id: scout
-    width: 64
-    height: 64
+    width: shipPic.width
+    height: shipPic.height
 
     property int scoutIndex: 0
     property bool selected: spaceshipManager.selectedScoutIndex == scoutIndex
     property int destX
     property int destY
+    property int floatHeight: 100
 
     Connections {
         target: spaceshipManager
@@ -27,17 +28,25 @@ Item {
             x += incx;
             y += incy;
         }
+
+        onRecallShip: {
+            if (selected) {
+                destX = mothershipX
+                destY = mothershipY + floatHeight
+            }
+        }
+
     }
 
     Behavior on x { NumberAnimation { duration: heartBeat } }
     Behavior on y { NumberAnimation { duration: heartBeat } }
 
-    Rectangle {
+    Image {
         id: shipPic
-        color: "purple"
-        width: parent.width
-        height: parent.height
-        y: -100 + incy
+        source: "../../gfx/cowscout-38x24-left.png"
+//        width: parent.width
+//        height: parent.height
+        y: -floatHeight + incy
         property int incy: 0
 
         Rectangle {
@@ -64,25 +73,27 @@ Item {
             PropertyAnimation {
                 property: "incy"
                 target: shipPic
-                from: -4
-                to: 4
+                from: -2
+                to: 2
                 easing.type: Easing.InOutSine
                 duration: floatAnimation.dur
             }
+            PauseAnimation { duration: floatAnimation.dur }
             PropertyAnimation {
                 property: "incy"
                 target: shipPic
-                from: 4
-                to: -4
+                from: 2
+                to: -2
                 easing.type: Easing.InOutSine
                 duration: floatAnimation.dur
             }
+            PauseAnimation { duration: floatAnimation.dur }
         }
     }
 
-    Rectangle {
+    Image {
         id: shadow
-        color: "gray"
+        source: "../../gfx/cowscoutshadow-38x24-left.png"
         width: parent.width
         height: parent.height
         opacity: Math.max(0, Math.min(1, (scout.y - grass.y)/50));
