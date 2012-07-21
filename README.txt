@@ -16,8 +16,10 @@ License: Creative Commons Attribution 3.0 Universal <http://creativecommons.org/
 Source: http://opengameart.org/content/simerion-tiles-and-images
 Changes (by Iwan Gabovitch):
  - alien is a color-changed cultist
+ - alien with gun has changed posture and a simple pixel stick in her hands
  - cow is a bit thinner and has longer legs
  - cow eat animations have the mouth changing shape and add some grass in the mouth
+ - cow step animations have the legs slightly deformed
  - grass is color modified and a bit shorter
  - surface is a color-modified and 'rectanglified' sand ground tile
  - cowscout and cowmothership are 'enginered' cows fit for space and air travel
