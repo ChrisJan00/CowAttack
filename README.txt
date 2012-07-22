@@ -2,6 +2,15 @@ Cow Attack
 
 A game about cows attacking aliens to eat their food!
 
+Compiling & Running
+===================
+
+In a UNIX environment with qt4.x installed you can compile and run the game using the following commands:
+
+  qmake .
+  make
+  ./cowAttack
+
 License & Authors
 =================
 
@@ -9,6 +18,7 @@ Art and code have different licenses.
 
 Cow Attack Code
 Copyright 2012 Christiaan Janssen and Aurindam Jana
+License: MISSING <MISSING>
 
 Cow Attack Simerion Graphics
 Copyright 2012 Yoann Sculo <yoann.sculo @ gmail .com> <http://twitter.com/yoannsculo> <http://yoannsculo.fr>
