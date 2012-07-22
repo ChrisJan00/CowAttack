@@ -277,8 +277,8 @@ Item {
             model: lives
             delegate: Image {
                 width: 10
-                height: 10
-                source: "../../gfx/cowhead.png"
+                height: 13
+                source: "../../gfx/cowhead-10x13.png"
             }
         }
     }
