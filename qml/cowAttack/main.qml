@@ -45,8 +45,8 @@ Rectangle {
         id: grass
         color: "green"
         width: parent.width
-        anchors.top: sky.bottom
-        anchors.bottom: parent.bottom
+        height: parent.height
+        y: sky.height
         gradient: Gradient {
             GradientStop { position: 0.0; color:"green"}
             GradientStop { position: 1.0; color:Qt.darker("green")}

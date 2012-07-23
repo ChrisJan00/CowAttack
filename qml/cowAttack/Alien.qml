@@ -26,24 +26,68 @@ Item {
         rectifyPosition();
     }
 
+    property bool alreadyChanged: false
     function rectifyPosition() {
+        if (!alreadyChanged && isInNode()) {
+            alreadyChanged = true;
+            switch (Math.floor(Math.random()*4)) {
+            case 0: {
+//                console.log("0")
+                speedX = alienSpeed;
+                speedY = 0;
+                break;
+            }
+            case 1: {
+//                console.log("1")
+                speedX = -alienSpeed;
+                speedY = 0;
+                break;
+            }
+            case 2: {
+//                console.log("2")
+                speedX = 0;
+                speedY = alienSpeed;
+                break;
+            }
+            case 3: {
+//                console.log("3")
+                speedX = 0;
+                speedY = -alienSpeed;
+                break;
+            }
+            }
+        }
+
+        if (!isInNode())
+            alreadyChanged = false;
         if ((x + sprite.width) > aliensManager.rightBound) {
             x = aliensManager.rightBound - sprite.width;
-            speedX = -speedX;
+            speedX = -alienSpeed;
+            speedY = 0;
         }
         if ((y + sprite.height) > aliensManager.bottomBound) {
             y = aliensManager.bottomBound - sprite.height;
-            speedY = -speedY;
+            speedY = -alienSpeed;
+            speedX = 0;
         }
 
         if (x < aliensManager.leftBound) {
             x = aliensManager.leftBound;
-            speedX = -speedX;
+            speedX = alienSpeed;
+            speedY = 0;
         }
         if (y < aliensManager.topBound) {
             y = aliensManager.topBound;
-            speedY = -speedY;
+            speedY = alienSpeed;
+            speedX = 0;
         }
+    }
+
+    function isInNode() {
+        var tolerance = 10
+        if (x % Math.floor(grass.width / aliensManager.arrayCountX) < tolerance && (y - grass.y) % Math.floor(grass.height / aliensManager.arrayCountY) < tolerance)
+            return true;
+        return false;
     }
 
     function checkDistanceFromCowScouts() {

@@ -47,8 +47,8 @@ Item {
         model: scoutCount
         delegate: Scout {
             scoutIndex: index
-            x: 40 + index * 140
-            y: 200 + Math.random() * 100
+            x: Math.floor(40 + index * root.width*0.4)
+            y: 200 + Math.random() * 200
             destX: x
             destY: y
         }
