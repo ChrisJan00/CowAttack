@@ -3,8 +3,8 @@ import QtQuick 1.1
 
 Rectangle {
     id: root
-    width: 500
-    height: 700
+    width: 800
+    height: 600
 
     property int heartBeat: 100
 
