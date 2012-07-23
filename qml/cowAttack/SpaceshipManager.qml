@@ -6,8 +6,8 @@ Item {
 
     property int selectedScoutIndex: 0
 
-    property int mothershipX: motherShip.x + motherShip.width / 2 - 28
-    property int mothershipY: motherShip.y + motherShip.height / 2 + 100 - 26
+    property int mothershipX: motherShadow.x + motherShadow.width / 2 - 28
+    property int mothershipY: motherShadow.y + motherShadow.height / 2 - 90
     property alias motherMilk: motherShip.milk
 
     signal moveScout
@@ -52,7 +52,7 @@ Item {
         delegate: Scout {
             scoutIndex: index
             x: Math.floor(40 + index * root.width*0.4)
-            y: 200 + Math.random() * 200
+            y: 250 + Math.random() * 200
             destX: x
             destY: y
         }

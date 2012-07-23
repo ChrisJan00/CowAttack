@@ -84,8 +84,6 @@ Item {
     Image {
         id: shipPic
         source: "../../gfx/cowmothership2-58x52.png"
-//        width: parent.width
-//        height: parent.height
         y: -floatHeight + incy
         property int incy: 0
         z: 2
@@ -275,7 +273,7 @@ Item {
         repeat: true
         onTriggered: {
             if (docked && energy > 0) {
-                var inc = Math.min(10, energy);
+                var inc = Math.min(5, energy);
                 motherMilk += inc;
                 energy -= inc;
             }
@@ -329,5 +327,15 @@ Item {
                 spaceshipManager.liveScoutCount--;
             }
         }
+    }
+
+    Image {
+        id: headBeam
+        opacity: (docked && energy > 0) ? 1 : 0
+        Behavior on opacity { NumberAnimation { duration: 500 } }
+        source: "../../gfx/beamsimple-48x200.png"
+        x: scout.width/2 - width/2
+        y: -height - floatHeight + 38
+        height: 100
     }
 }
