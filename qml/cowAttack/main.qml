@@ -70,11 +70,6 @@ Rectangle {
         id: winScreen
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: winScreen.show()
-    }
-
     Image {
         id: titleScreen
         source: "../../gfx/titlescreen.png"
