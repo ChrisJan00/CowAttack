@@ -70,6 +70,15 @@ Rectangle {
         id: winScreen
     }
 
-
+    Image {
+        id: titleScreen
+        source: "../../gfx/titlescreen.png"
+        anchors.fill: parent
+        Behavior on opacity { NumberAnimation { duration: 1000 } }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: titleScreen.opacity = 0;
+        }
+    }
 
 }
