@@ -1,11 +1,17 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
+import SDLMixerWrapper 1.0
 
 Item {
     id: winScreen
     anchors.fill: parent
 //    color: "gray"
 //    opacity: 0
+
+    SoundClip {
+        id: winSound
+        source: "sfx/gameover-win.ogg"
+    }
 
     Image {
         id: curtain
@@ -39,6 +45,9 @@ Item {
             from: -curtain.height
             to: 0
             duration: 4000
+        }
+        ScriptAction {
+            script: winSound.play();
         }
         PauseAnimation { duration: 500 }
         PropertyAnimation {

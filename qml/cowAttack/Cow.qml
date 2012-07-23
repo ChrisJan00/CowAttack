@@ -1,5 +1,6 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
+import SDLMixerWrapper 1.0
 
 Image {
     id: cow
@@ -13,6 +14,16 @@ Image {
     property bool dying: false
 
     state: "normal"
+
+    SoundClip {
+        id: mooSound
+        source: "sfx/moo-death.ogg"
+    }
+
+    SoundClip {
+        id: chewingSound
+        source: "sfx/chewing.ogg"
+    }
 
     Connections {
         target: root
@@ -108,6 +119,7 @@ Image {
         dying = true;
         scout.lives--;
         deathAnimation.start();
+        mooSound.play();
         if (scout.lives == 0)
             scout.die();
     }
@@ -136,6 +148,8 @@ Image {
         }
     ]
 
+    property int pasturingTime: 0
+
     Timer {
         running: true
         repeat: true
@@ -145,7 +159,15 @@ Image {
                              cow.state = "chew2";
                          else
                              cow.state = "chew1";
-                     } else
+                         pasturingTime -= interval;
+                         if (pasturingTime <= 0) {
+                             pasturingTime = 3500;
+                             chewingSound.play();
+                         }
+                     } else {
+                         pasturingTime = 0;
+                         chewingSound.stop();
                          cow.state = "normal";
+                     }
     }
 }

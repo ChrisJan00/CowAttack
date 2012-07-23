@@ -1,5 +1,6 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
+import SDLMixerWrapper 1.0
 
 Item {
     id: scout
@@ -17,8 +18,34 @@ Item {
     property int energyMax: 1000
 
     property bool docked: x == mothershipX && y == (mothershipY + floatHeight)
+    property bool moving: x != destX || y != destY
 
     property int lives: 5
+
+    SoundClip {
+        id: mooLament
+        source: "sfx/moo-notification.ogg"
+    }
+
+    SoundClip {
+        id: zapSound
+        source: "sfx/gun-zap.ogg"
+    }
+
+    SoundClip {
+        id: deploySound
+        source: "sfx/beam-down.ogg"
+    }
+
+    SoundClip {
+        id: retrieveSound
+        source: "sfx/beam-up.ogg"
+    }
+
+    SoundClip {
+        id: moveSound
+        source: "sfx/beam-wowow.ogg"
+    }
 
     Connections {
         target: spaceshipManager
@@ -155,6 +182,7 @@ Item {
                 cow.x = shipPic.width / 2 - cow.width / 2
                 cow.y = shipPic.height - floatHeight
                 beam.opacity = 1;
+                deploySound.play();
             }
         }
         ParallelAnimation {
@@ -194,6 +222,7 @@ Item {
                 beam.opacity = 1;
                 cow.pasturing = false;
                 cowPositions.get(scoutIndex).active = false;
+                retrieveSound.play();
             }
         }
         ParallelAnimation {
@@ -267,6 +296,7 @@ Item {
         }
     }
 
+    property int movingTime: 0
     Timer {
         interval: heartBeat
         running: true
@@ -276,6 +306,16 @@ Item {
                 var inc = Math.min(5, energy);
                 motherMilk += inc;
                 energy -= inc;
+            }
+            if (moving) {
+                movingTime -= interval;
+                if (movingTime <= 0) {
+                    moveSound.play();
+                    movingTime = 3587;
+                }
+            } else {
+                movingTime = 0;
+                moveSound.stop();
             }
         }
     }
@@ -302,6 +342,9 @@ Item {
     SequentialAnimation {
         id: crashAnimation
         PauseAnimation { duration: 500 }
+        ScriptAction {
+            script: zapSound.play();
+        }
         ParallelAnimation {
             RotationAnimation {
                 target: shipPic
@@ -320,6 +363,9 @@ Item {
                 duration: 2000
             }
         }
+        ScriptAction {
+            script: mooLament.play();
+        }
         PauseAnimation { duration: 500 }
         ScriptAction {
             script: {
@@ -332,6 +378,8 @@ Item {
     Image {
         id: headBeam
         opacity: (docked && energy > 0) ? 1 : 0
+        onOpacityChanged: if (opacity == 1)
+                              retrieveSound.play();
         Behavior on opacity { NumberAnimation { duration: 500 } }
         source: "../../gfx/beamsimple-48x200.png"
         x: scout.width/2 - width/2

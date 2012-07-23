@@ -1,6 +1,7 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 import Qt.labs.particles 1.0
+import SDLMixerWrapper 1.0
 
 Item {
     id: alien
@@ -15,6 +16,11 @@ Item {
         id: sprite
         source: "../../gfx/alien-16x32-right.png"
         Component.onCompleted: rectifyPosition()
+    }
+
+    SoundClip {
+        id: shootSound
+        source: "sfx/gun-piu.ogg"
     }
 
     function updatePosition() {
@@ -152,6 +158,7 @@ Item {
             emitter.burst(1);
             root.whichCow = victimCow
             root.cowIsShot();
+            shootSound.play();
         }
     }
 
