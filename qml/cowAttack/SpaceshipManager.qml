@@ -16,21 +16,25 @@ Item {
     property int destX
     property int destY
 
-    // mothership
-    Mothership {
-        id: motherShip
-        y: 20
+    Image {
+        id: motherShadow
+        source: "../../gfx/mothershadow.png"
+        y: motherShip.y + 200
+        x: motherShip.x
     }
 
     MouseArea {
         id: scoutControl
         x: 19
-        y: grass.y + 14
+        y: grass.y
         width: grass.width - 38
-        height: grass.height - 24
+        height: grass.height - 12
+        property int ylimit : grass.y
         onClicked: {
-            destX = mouseX;
-            destY = mouseY + y - 24;
+            destX = mouseX - 14;
+            destY = mouseY + y;
+            if (destY < ylimit)
+                destY = ylimit;
             moveScout();
         }
     }
@@ -52,6 +56,12 @@ Item {
             destX: x
             destY: y
         }
+    }
+
+    // mothership
+    Mothership {
+        id: motherShip
+        y: 20
     }
 
     Timer {

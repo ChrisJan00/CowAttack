@@ -57,6 +57,18 @@ Item {
 //        height: parent.height
         y: height/2
         opacity: Math.max(0, Math.min(1, (scout.y - grass.y)/50));
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (!selected) {
+                    spaceshipManager.selectedScoutIndex = scoutIndex
+                } else if (!cowSpawned) {
+                        deployCow();
+                } else {
+                        retrieveCow();
+                }
+            }
+        }
     }
 
     Image {

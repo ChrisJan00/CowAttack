@@ -15,12 +15,6 @@ Item {
                    }
 
     Image {
-        id: motherShadow
-        source: "../../gfx/mothershadow.png"
-        y: 200
-    }
-
-    Image {
         id: motherPic
         y: incy
         property int incy
