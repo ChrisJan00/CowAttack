@@ -20,6 +20,7 @@ Rectangle {
     MusicClip {
         id: ingameMusic
         source: "sfx/ingamemusic.ogg"
+        loops: -1
     }
 
 
