@@ -10,7 +10,7 @@ Item {
     property bool selected: spaceshipManager.selectedScoutIndex == scoutIndex
     property int destX
     property int destY
-    property int floatHeight: 150
+    property int floatHeight: 100
     property bool cowSpawned: false
 
     property int energy: 0

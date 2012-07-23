@@ -24,13 +24,13 @@ Item {
 
     MouseArea {
         id: scoutControl
-        x: 29
-        y: grass.y + 26
-        width: grass.width - 58
-        height: grass.height - 52
+        x: 19
+        y: grass.y + 14
+        width: grass.width - 38
+        height: grass.height - 24
         onClicked: {
             destX = mouseX;
-            destY = mouseY + y - 26;
+            destY = mouseY + y - 24;
             moveScout();
         }
     }
