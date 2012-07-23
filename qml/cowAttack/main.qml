@@ -1,5 +1,6 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
+import SDLMixerWrapper 1.0
 
 Rectangle {
     id: root
@@ -7,6 +8,19 @@ Rectangle {
     height: 600
 
     property int heartBeat: 100
+    property int sfxVolume: 32
+
+
+    MusicClip {
+        id: introMusic
+        source: "sfx/intromusic.ogg"
+        repeating: true
+    }
+
+    MusicClip {
+        id: ingameMusic
+        source: "sfx/ingamemusic.ogg"
+    }
 
 
     property int whichCow: -1
@@ -77,8 +91,16 @@ Rectangle {
         Behavior on opacity { NumberAnimation { duration: 1000 } }
         MouseArea {
             anchors.fill: parent
-            onClicked: titleScreen.opacity = 0;
+            onClicked: {
+                titleScreen.opacity = 0;
+                introMusic.repeating = false;
+            }
         }
+    }
+
+    Component.onCompleted: {
+        introMusic.play();
+        ingameMusic.enqueue();
     }
 
 }

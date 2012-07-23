@@ -18,11 +18,13 @@ Image {
     SoundClip {
         id: mooSound
         source: "sfx/moo-death.ogg"
+        volume: sfxVolume
     }
 
     SoundClip {
         id: chewingSound
         source: "sfx/chewing.ogg"
+        volume: sfxVolume
     }
 
     Connections {

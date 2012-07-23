@@ -11,6 +11,7 @@ Item {
     SoundClip {
         id: winSound
         source: "sfx/gameover-win.ogg"
+        volume: sfxVolume * 2
     }
 
     Image {
@@ -35,6 +36,13 @@ Item {
     function show() {
         mouseEater.enabled = true;
         endAnimation.start();
+        if (introMusic.playing) {
+            introMusic.repeating = false;
+            introMusic.fadeOut(4000);
+            ingameMusic.unqueue();
+        } else {
+            ingameMusic.fadeOut(4000);
+        }
     }
 
     SequentialAnimation {

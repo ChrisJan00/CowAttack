@@ -29,6 +29,8 @@ QString unpacked(QString filename)
     return QString();
 }
 
+void initMusicControl();
+
 // Mixer Instance
 bool StartMixer() {
     if (SDL_Init(SDL_INIT_AUDIO) != 0) {
@@ -44,6 +46,8 @@ bool StartMixer() {
         qDebug() << "Unable to initialize audio:" << Mix_GetError();
         return false;
     }
+
+    initMusicControl();
 
     Mix_HookMusicFinished(musicFinished);
     return true;
@@ -78,6 +82,7 @@ public:
     QString fileName;
     Mix_Chunk *sound;
     int channel;
+    int volume; // 0 to 128
 };
 
 SoundClip::SoundClip(QObject *parent) : QObject(parent)
@@ -85,6 +90,7 @@ SoundClip::SoundClip(QObject *parent) : QObject(parent)
     d = new SoundClipPrivate;
     d->sound = 0;
     d->channel = -1;
+    d->volume = 128;
 }
 
 SoundClip::~SoundClip()
@@ -137,6 +143,7 @@ void SoundClip::play()
     if(d->channel == -1) {
         qDebug() << "Unable to play WAV file" << d->fileName << ":" << Mix_GetError();
     }
+    Mix_Volume(d->channel, d->volume);
 }
 
 void SoundClip::stop()
@@ -145,6 +152,25 @@ void SoundClip::stop()
     if (d->channel != -1) {
         Mix_HaltChannel(d->channel);
         d->channel = -1;
+    }
+}
+
+int SoundClip::volume() const
+{
+    return d->volume;
+}
+
+void SoundClip::setVolume(int newVolume)
+{
+    if (d->volume != newVolume) {
+        d->volume = newVolume;
+        if (d->volume > 128)
+            d->volume = 128;
+        if (d->volume < 0)
+            d->volume = 0;
+        if (playing())
+            Mix_Volume(d->channel, d->volume);
+        emit volumeChanged();
     }
 }
 
@@ -157,17 +183,31 @@ public:
     bool isPlaying;
     int loops;
     int fadeInTime;
+    bool willRepeat;
+    int volume;
 };
 
 struct MusicControl {
     QList <MusicClip *> allMusicInstances;
     QList <MusicClip *> musicQueue;
     int musicCount;
+    bool repeatCurrent;
+    MusicClip * currentlyPlaying;
 } musicControl;
+
+void initMusicControl()
+{
+    musicControl.musicCount = 0;
+    musicControl.repeatCurrent = false;
+    musicControl.currentlyPlaying = 0;
+}
 
 void musicFinished() {
     foreach (MusicClip *clip, musicControl.allMusicInstances)
         clip->notifyFinish();
+
+    if (musicControl.repeatCurrent && musicControl.currentlyPlaying)
+        musicControl.currentlyPlaying->play();
 
     if (musicControl.musicCount == 0 && !musicControl.musicQueue.isEmpty()) {
         MusicClip *nextSong = musicControl.musicQueue.first();
@@ -184,6 +224,8 @@ MusicClip::MusicClip(QObject *parent) : QObject(parent)
     d->isPlaying = false;
     d->loops = 0;
     d->fadeInTime = 0;
+    d->willRepeat = false;
+    d->volume = 128;
     musicControl.allMusicInstances.append(this);
 }
 
@@ -273,8 +315,11 @@ void MusicClip::play()
         qDebug() << "Unable to play Music file:" << Mix_GetError();
         return;
     }
+    Mix_VolumeMusic(d->volume);
     d->isPlaying = true;
     musicControl.musicCount++;
+    musicControl.currentlyPlaying = this;
+    musicControl.repeatCurrent = d->willRepeat;
 }
 
 void MusicClip::stop()
@@ -293,9 +338,48 @@ void MusicClip::enqueue()
         musicControl.musicQueue.append(this);
 }
 
+void MusicClip::unqueue()
+{
+    musicControl.musicQueue.removeOne(this);
+}
+
 void MusicClip::fadeOut(int ms)
 {
     if (d->isPlaying)
         Mix_FadeOutMusic(ms);
+}
+
+bool MusicClip::repeating() const
+{
+    return d->willRepeat;
+}
+
+void MusicClip::setRepeating(bool repeating)
+{
+    if (d->willRepeat != repeating) {
+        d->willRepeat = repeating;
+        if (d->isPlaying)
+            musicControl.repeatCurrent = repeating;
+        emit repeatingChanged();
+    }
+}
+
+int MusicClip::volume() const
+{
+    return d->volume;
+}
+
+void MusicClip::setVolume(int newVolume)
+{
+    if (d->volume != newVolume) {
+        d->volume = newVolume;
+        if (d->volume > 128)
+            d->volume = 128;
+        if (d->volume < 0)
+            d->volume = 0;
+        if (playing())
+            Mix_VolumeMusic(d->volume);
+        emit volumeChanged();
+    }
 }
 

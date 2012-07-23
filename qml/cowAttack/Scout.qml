@@ -9,8 +9,8 @@ Item {
 
     property int scoutIndex: 0
     property bool selected: spaceshipManager.selectedScoutIndex == scoutIndex
-    property int destX
-    property int destY
+    property int destX: x
+    property int destY: y
     property int floatHeight: 100
     property bool cowSpawned: false
 
@@ -25,26 +25,31 @@ Item {
     SoundClip {
         id: mooLament
         source: "sfx/moo-notification.ogg"
+        volume: sfxVolume
     }
 
     SoundClip {
         id: zapSound
         source: "sfx/gun-zap.ogg"
+        volume: sfxVolume
     }
 
     SoundClip {
         id: deploySound
         source: "sfx/beam-down.ogg"
+        volume: sfxVolume
     }
 
     SoundClip {
         id: retrieveSound
         source: "sfx/beam-up.ogg"
+        volume: sfxVolume
     }
 
     SoundClip {
         id: moveSound
         source: "sfx/beam-wowow.ogg"
+        volume: sfxVolume
     }
 
     Connections {
@@ -296,7 +301,7 @@ Item {
         }
     }
 
-    property int movingTime: 0
+    property int movingTime: 3587
     Timer {
         interval: heartBeat
         running: true

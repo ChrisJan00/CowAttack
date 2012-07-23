@@ -21,6 +21,7 @@ Item {
     SoundClip {
         id: shootSound
         source: "sfx/gun-piu.ogg"
+        volume: sfxVolume
     }
 
     function updatePosition() {
