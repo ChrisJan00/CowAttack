@@ -382,6 +382,7 @@ Item {
             script: {
                 scout.visible = false;
                 spaceshipManager.liveScoutCount--;
+                cowPositions.get(scoutIndex).scoutAlive = false;
             }
         }
     }

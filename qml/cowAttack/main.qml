@@ -32,16 +32,19 @@ Rectangle {
             active: false
             x: 0
             y: 0
+            scoutAlive: true
         }
         ListElement {
             active: false
             x: 0
             y: 0
+            scoutAlive: true
         }
         ListElement {
             active: false
             x: 0
             y: 0
+            scoutAlive: true
         }
     }
 

@@ -52,6 +52,7 @@ Item {
         delegate: ScoutShadow {
             x: cowPositions.get(index).x - 24
             y: cowPositions.get(index).y
+            visible: cowPositions.get(index).scoutAlive
         }
     }
 

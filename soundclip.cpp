@@ -141,9 +141,11 @@ void SoundClip::play()
 
     d->channel = Mix_PlayChannel(-1, d->sound, 0);
     if(d->channel == -1) {
-        qDebug() << "Unable to play WAV file" << d->fileName << ":" << Mix_GetError();
+        // silent error
+        //qDebug() << "Unable to play WAV file" << d->fileName << ":" << Mix_GetError();
+    } else {
+        Mix_Volume(d->channel, d->volume);
     }
-    Mix_Volume(d->channel, d->volume);
 }
 
 void SoundClip::stop()
