@@ -13,6 +13,8 @@ Item {
     signal moveScout
     signal updateSpaceships
     signal recallShip
+    signal recallAllShips
+    signal shipOnPlace
     property int destX
     property int destY
 

@@ -12,7 +12,7 @@ Item {
 
     onMilkChanged: if (milk > milkMax) {
                        milk = milkMax;
-                       winScreen.show();
+                       leave();
                    }
 
     SoundClip {
@@ -24,6 +24,12 @@ Item {
     SoundClip {
         id: zapSound
         source: "sfx/gun-zap.ogg"
+        volume: sfxVolume
+    }
+
+    SoundClip {
+        id: leavingSound
+        source: "sfx/beam-wowowfast.ogg"
         volume: sfxVolume
     }
 
@@ -68,6 +74,7 @@ Item {
     }
 
     Rectangle {
+        id: milkDisplay
         border.width: 0
         border.color: "black"
         color: "purple"
@@ -75,6 +82,7 @@ Item {
         width: milk / milkMax * mothership.width
         height: 8
         y : -8
+        x : motherPic.x
         Rectangle {
             border.width: 1
             border.color: "black"
@@ -149,6 +157,100 @@ Item {
                 mothership.visible = false;
                 mooLament.play();
                 loseScreen.show();
+            }
+        }
+    }
+
+    function leave()
+    {
+        spaceshipManager.recallAllShips();
+//        leaveAnimation.start();
+    }
+
+    Connections {
+        target: spaceshipManager
+        onShipOnPlace: {
+            var i, dockedCount = 0;
+            for (i=0; i < cowPositions.count; i++) {
+                if ((!cowPositions.get(i).scoutAlive) ||
+                     (cowPositions.get(i).x - 24 == spaceshipManager.mothershipX &&
+                        cowPositions.get(i).y - 16 == spaceshipManager.mothershipY))
+                    dockedCount++;
+            }
+
+            if (dockedCount == 3)
+                leaveAnimation.start();
+        }
+    }
+
+    SequentialAnimation {
+        id: leaveAnimation
+        property int dur : 10000
+        ScriptAction{
+            script: leavingAlready = true;
+        }
+        PropertyAnimation {
+            target: milkDisplay
+            property: "opacity"
+            to: 0
+            duration: 1000
+        }
+        ParallelAnimation {
+            PropertyAnimation {
+                target: motherPic
+                property: "x"
+                from: 0
+                to: root.width
+                duration: leaveAnimation.dur
+                easing.type: Easing.InQuart
+            }
+            PropertyAnimation {
+                target: motherPic
+                property: "y"
+                to: -motherPic.height
+                duration: leaveAnimation.dur
+                easing.type: Easing.InQuart
+            }
+            PropertyAnimation {
+                target: motherShadow
+                property: "x"
+                from: mothership.x
+                to: root.width + mothership.x
+                duration: leaveAnimation.dur
+                easing.type: Easing.InQuart
+            }
+            PropertyAnimation {
+                target: motherShadow
+                property: "opacity"
+                to: 0
+                duration: leaveAnimation.dur
+                easing.type: Easing.InQuart
+            }
+        }
+        ScriptAction {
+            script: {
+                leavingAlready = false;
+                winScreen.show();
+            }
+        }
+    }
+
+    property bool leavingAlready: false
+    property int movingTime: 4119
+    Timer {
+        interval: heartBeat
+        running: true
+        repeat: true
+        onTriggered: {
+            if (leavingAlready) {
+                movingTime -= interval;
+                if (movingTime <= 0) {
+                    leavingSound.play();
+                    movingTime = 4119;
+                }
+            } else {
+                movingTime = 0;
+                leavingSound.stop();
             }
         }
     }

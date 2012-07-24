@@ -21,10 +21,14 @@ Item {
     property bool moving: x != destX || y != destY
 
     property int lives: 5
+    property bool finishing: false
 
     property bool ready: false
     onXChanged: if (ready) cowPositions.get(scoutIndex).x = x + cow.width/2;
     onYChanged: if (ready) cowPositions.get(scoutIndex).y = y + cow.height/2;
+
+    onDockedChanged: checkFinish();
+    onFinishingChanged: checkFinish();
 
     Component.onCompleted: {
         cowPositions.get(scoutIndex).x = x + 24;
@@ -86,6 +90,18 @@ Item {
                 destY = mothershipY + floatHeight
             }
         }
+        onRecallAllShips: {
+            if (!visible) {
+                spaceshipManager.shipOnPlace();
+                return;
+            }
+            finishing = true;
+            if (cowSpawned) {
+                retrieveCow();
+            }
+            destX = mothershipX
+            destY = mothershipY + floatHeight
+        }
 
     }
 
@@ -99,6 +115,7 @@ Item {
         height: 24
         MouseArea {
             anchors.fill: parent
+            enabled: !finishing
             onClicked: {
                 if (!selected) {
                     spaceshipManager.selectedScoutIndex = scoutIndex
@@ -139,6 +156,7 @@ Item {
 
         MouseArea {
             anchors.fill: parent
+            enabled: !finishing
             onClicked: {
                 if (!selected) {
                     spaceshipManager.selectedScoutIndex = scoutIndex
@@ -397,5 +415,36 @@ Item {
         x: scout.width/2 - width/2
         y: -height - floatHeight + 38
         height: 100
+    }
+
+    function checkFinish()
+    {
+        if (finishing && docked && !leaveAnimation.running)
+            leaveAnimation.start();
+    }
+
+    SequentialAnimation {
+        id: leaveAnimation
+        ScriptAction {
+            script: headBeam.opacity = 1;
+        }
+        PauseAnimation { duration: 500 }
+        PropertyAnimation {
+            target: scout
+            property: "opacity"
+            to: 0
+            duration: 2000
+        }
+        ScriptAction {
+            script: {
+                // hack for hiding shadow
+                cowPositions.get(scoutIndex).scoutAlive = false;
+                headBeam.opacity = 0;
+            }
+        }
+        PauseAnimation { duration: 500 }
+        ScriptAction {
+            script: spaceshipManager.shipOnPlace();
+        }
     }
 }
