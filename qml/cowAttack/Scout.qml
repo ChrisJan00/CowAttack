@@ -145,6 +145,10 @@ Item {
         property int incy: 0
         z: 2
 
+        Light { x: 0; y: 18 }
+        Light { x: 29; y: 32 }
+        Light { x: 57; y: 18 }
+
         Rectangle {
             anchors.fill: parent
             color: "transparent"

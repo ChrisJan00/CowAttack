@@ -34,7 +34,7 @@ Item {
         property int ylimit : grass.y
         onClicked: {
             destX = mouseX - 14;
-            destY = mouseY + y;
+            destY = mouseY + y - 32;
             if (destY < ylimit)
                 destY = ylimit;
             moveScout();

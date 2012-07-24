@@ -37,10 +37,7 @@ Item {
         id: motherPic
         y: incy
         property int incy
-
         source: "../../gfx/cowmothership3-256x138.png"
-        function update() {
-        }
 
         SequentialAnimation {
             id: floatAnimation
@@ -71,6 +68,12 @@ Item {
             anchors.fill: parent
             onClicked: spaceshipManager.recallShip()
         }
+
+        Light { x: 26; y: 111 }
+        Light { x: 80; y: 128 }
+        Light { x: 128; y: 128 }
+        Light { x: 166; y: 128 }
+        Light { x: 225; y: 114 }
     }
 
     Rectangle {
