@@ -11,6 +11,7 @@ Item {
     property int speedY: 0;
     property bool move: true;
     property int victimCow: -1
+    property bool wasLookingLeft: false
 
     Image {
         id: sprite
@@ -24,13 +25,100 @@ Item {
         volume: sfxVolume
     }
 
+    states: [
+        State {
+            name: "lookleft"
+            PropertyChanges {
+                target: sprite
+                source: "../../gfx/alien-16x32-left.png"
+            }
+        },
+        State {
+            name: "lookright"
+            PropertyChanges {
+                target: sprite
+                source: "../../gfx/alien-16x32-right.png"
+            }
+        },
+        State {
+            name: "lookup"
+            PropertyChanges {
+                target: sprite
+                source: "../../gfx/alien-16x32-up.png"
+            }
+        },
+        State {
+            name: "shootleft"
+            PropertyChanges {
+                target: sprite
+                source: "../../gfx/alien-16x32-left-withgun.png"
+            }
+        },
+        State {
+            name: "shootright"
+            PropertyChanges {
+                target: sprite
+                source: "../../gfx/alien-16x32-right-withgun.png"
+            }
+        },
+        State {
+            name: "shootup"
+            PropertyChanges {
+                target: sprite
+                source: "../../gfx/alien-16x32-up-withgun.png"
+            }
+        }
+    ]
+
+    function updateSprite() {
+        if (move) {
+            if (speedY < 0) {
+                state = "lookup";
+                return;
+            }
+            if (speedX < 0) {
+                state = "lookleft";
+                wasLookingLeft = true;
+                return;
+            }
+            if (speedX > 0) {
+                state = "lookright";
+                wasLookingLeft = false;
+                return;
+            }
+            // default
+            state = wasLookingLeft ? "lookleft" : "lookright";
+        } else {
+            if (victimCow == -1)
+                return;
+            var cowAngle = getCowAngle(victimCow);
+
+            if (cowAngle <= -45 && cowAngle >= -135) {
+                state = "shootup";
+                return;
+            }
+            if (cowPositions.get(victimCow).x < alien.x) {
+                state = "shootleft";
+                return;
+            }
+            if (cowPositions.get(victimCow).x > alien.x) {
+                state = "shootright";
+                return;
+            }
+            state = wasLookingLeft ? "shootleft" : "shootright";
+        }
+    }
+
     function updatePosition() {
         checkDistanceFromCowScouts();
-        if (!move)
+        if (!move) {
+            updateSprite();
             return;
+        }
         x += speedX;
         y += speedY;
         rectifyPosition();
+        updateSprite();
     }
 
     property bool alreadyChanged: false
@@ -168,7 +256,7 @@ Item {
         var cowX = cowPositions.get(cowIndex).x;
         var cowY = cowPositions.get(cowIndex).y;
         if (cowX != x)
-            return Math.atan2(cowY - y - alien.width/2, cowX - x - alien.height/2) * 180/ Math.PI;
+            return Math.atan2(cowY - y - alien.height/2, cowX - x - alien.width/2) * 180/ Math.PI;
         else
             return cowY < y? 0 : 180;
     }
