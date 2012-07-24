@@ -45,15 +45,8 @@ Rectangle {
         }
     }
 
-    Rectangle {
+    Sky {
         id: sky
-        color: "blue"
-        width: parent.width
-        height: 200
-        gradient: Gradient {
-            GradientStop { position: 0.0; color:"darkBlue"}
-            GradientStop { position: 1.0; color:"blue"}
-        }
     }
 
     Rectangle {
