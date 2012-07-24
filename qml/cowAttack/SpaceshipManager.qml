@@ -43,7 +43,7 @@ Item {
     property int liveScoutCount: scoutCount
     onLiveScoutCountChanged: {
         if (liveScoutCount == 0)
-            loseScreen.show();
+            motherShip.fall();
     }
 
     // shadows
