@@ -13,6 +13,9 @@ Item {
     property int victimCow: -1
     property bool wasLookingLeft: false
 
+    width: sprite.width
+    height: sprite.height
+
     Image {
         id: sprite
         source: "../../gfx/alien-16x32-right.png"
