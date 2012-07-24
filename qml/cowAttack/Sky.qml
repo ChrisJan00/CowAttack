@@ -18,7 +18,7 @@ Rectangle {
         height: parent.height - 10
         source: "../../gfx/star-15x15.png"
         lifeSpan: 10000
-        lifeSpanDeviation: 3000
+        lifeSpanDeviation: 6000
         count: 50
         emissionRate: 15
         emissionVariance: 10

@@ -49,16 +49,11 @@ Rectangle {
         id: sky
     }
 
-    Rectangle {
+    Grass {
         id: grass
-        color: "green"
         width: parent.width
-        height: parent.height
+        height: parent.height - sky.height
         y: sky.height
-        gradient: Gradient {
-            GradientStop { position: 0.0; color:"green"}
-            GradientStop { position: 1.0; color:Qt.darker("green")}
-        }
     }
 
 
