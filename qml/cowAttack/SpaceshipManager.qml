@@ -46,6 +46,15 @@ Item {
             loseScreen.show();
     }
 
+    // shadows
+    Repeater {
+        model: scoutCount
+        delegate: ScoutShadow {
+            x: cowPositions.get(index).x - 24
+            y: cowPositions.get(index).y
+        }
+    }
+
     // scouts
     Repeater {
         model: scoutCount

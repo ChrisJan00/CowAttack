@@ -22,6 +22,16 @@ Item {
 
     property int lives: 5
 
+    property bool ready: false
+    onXChanged: if (ready) cowPositions.get(scoutIndex).x = x + cow.width/2;
+    onYChanged: if (ready) cowPositions.get(scoutIndex).y = y + cow.height/2;
+
+    Component.onCompleted: {
+        cowPositions.get(scoutIndex).x = x + 24;
+        cowPositions.get(scoutIndex).y = y + 16;
+        ready = true;
+    }
+
     SoundClip {
         id: mooLament
         source: "sfx/moo-notification.ogg"
@@ -82,13 +92,11 @@ Item {
     Behavior on x { NumberAnimation { duration: heartBeat } }
     Behavior on y { NumberAnimation { duration: heartBeat } }
 
-    Image {
-        id: shadow
-        source: "../../gfx/cowscoutshadow-38x24-left.png"
-//        width: parent.width
-//        height: parent.height
+    Item {
+        id: shadowPlaceholder
         y: height/2
-        opacity: Math.max(0, Math.min(1, (scout.y - grass.y)/50));
+        width: 38
+        height: 24
         MouseArea {
             anchors.fill: parent
             onClicked: {
@@ -214,8 +222,6 @@ Item {
                 cow.pastureAcc = 0;
                 cow.pasturing = true;
                 cowPositions.get(scoutIndex).active = true;
-                cowPositions.get(scoutIndex).x = scout.x + cow.width/2;
-                cowPositions.get(scoutIndex).y = scout.y + cow.height / 2;
             }
         }
     }
