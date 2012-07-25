@@ -33,6 +33,12 @@ Item {
         volume: sfxVolume
     }
 
+    SoundClip {
+        id: fallingSound
+        source: "sfx/moo-massdeath.ogg"
+        volume: sfxVolume
+    }
+
     Image {
         id: motherPic
         y: incy
@@ -102,7 +108,7 @@ Item {
     SequentialAnimation {
         id: fallAnimation
         ScriptAction {
-            script: zapSound.play();
+            script: fallingSound.play();
         }
         SequentialAnimation {
             loops: 10
