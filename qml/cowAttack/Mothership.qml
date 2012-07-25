@@ -16,8 +16,8 @@ Item {
                    }
 
     SoundClip {
-        id: mooLament
-        source: "sfx/moo-notification.ogg"
+        id: explosionSound
+        source: "sfx/explosion-big.ogg"
         volume: sfxVolume
     }
 
@@ -164,7 +164,7 @@ Item {
         ScriptAction {
             script: {
                 mothership.visible = false;
-                mooLament.play();
+                explosionSound.play();
                 loseScreen.show();
             }
         }

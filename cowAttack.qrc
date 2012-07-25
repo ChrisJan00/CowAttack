@@ -46,6 +46,7 @@
         <file>sfx/beam-up.ogg</file>
         <file>sfx/beam-wowowfast.ogg</file>
         <file>sfx/beam-wowow.ogg</file>
+        <file>sfx/beam-dududu-charging.ogg</file>
         <file>sfx/chewing.ogg</file>
         <file>sfx/gameover-lose.ogg</file>
         <file>sfx/gameover-win.ogg</file>
@@ -56,5 +57,9 @@
         <file>sfx/moo-death.ogg</file>
         <file>sfx/moo-massdeath.ogg</file>
         <file>sfx/moo-notification.ogg</file>
+        <file>sfx/moo-lament.ogg</file>
+        <file>sfx/explosion-big.ogg</file>
+        <file>sfx/explosion-small.ogg</file>
+        <file>sfx/targeting.ogg</file>
     </qresource>
 </RCC>

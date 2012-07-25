@@ -37,8 +37,14 @@ Item {
     }
 
     SoundClip {
-        id: mooLament
-        source: "sfx/moo-notification.ogg"
+        id: lamentSound
+        source: "sfx/moo-lament.ogg"
+        volume: sfxVolume
+    }
+
+    SoundClip {
+        id: explosionSound
+        source: "sfx/explosion-small.ogg"
         volume: sfxVolume
     }
 
@@ -57,6 +63,12 @@ Item {
     SoundClip {
         id: retrieveSound
         source: "sfx/beam-up.ogg"
+        volume: sfxVolume
+    }
+
+    SoundClip {
+        id: emptySound
+        source: "sfx/beam-dududu-charging.ogg"
         volume: sfxVolume
     }
 
@@ -374,9 +386,8 @@ Item {
 
     SequentialAnimation {
         id: crashAnimation
-        PauseAnimation { duration: 500 }
         ScriptAction {
-            script: zapSound.play();
+            script: lamentSound.play();
         }
         ParallelAnimation {
             RotationAnimation {
@@ -397,7 +408,7 @@ Item {
             }
         }
         ScriptAction {
-            script: mooLament.play();
+            script: explosionSound.play();
         }
         PauseAnimation { duration: 500 }
         ScriptAction {
@@ -413,7 +424,7 @@ Item {
         id: headBeam
         opacity: (docked && energy > 0) ? 1 : 0
         onOpacityChanged: if (opacity == 1)
-                              retrieveSound.play();
+                              emptySound.play();
         Behavior on opacity { NumberAnimation { duration: 500 } }
         source: ":/gfx/beamsimple-48x200.png"
         x: scout.width/2 - width/2

@@ -28,6 +28,12 @@ Item {
         volume: sfxVolume
     }
 
+    SoundClip {
+        id: targetSound
+        source: "sfx/targeting.ogg"
+        volume: sfxVolume
+    }
+
     states: [
         State {
             name: "lookleft"
