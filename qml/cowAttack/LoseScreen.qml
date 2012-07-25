@@ -16,6 +16,8 @@ Item {
 
     Image {
         id: curtain
+        width: parent.width
+        height: parent.height + 400
         source: "../../gfx/backgroundover-900x500-darkness.png"
         y: -height
     }
