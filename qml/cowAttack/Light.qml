@@ -9,10 +9,10 @@ Particles {
     count: 1
     source: {
         switch (Math.floor(Math.random() * 4)) {
-        case 0: return "../../gfx/lightred-15x15.png";
-        case 1: return "../../gfx/lightcyan-15x15.png";
-        case 2: return "../../gfx/lightyellow-15x15.png";
-        case 3: return "../../gfx/lightpurple-15x15.png";
+        case 0: return ":/gfx/lightred-15x15.png";
+        case 1: return ":/gfx/lightcyan-15x15.png";
+        case 2: return ":/gfx/lightyellow-15x15.png";
+        case 3: return ":/gfx/lightpurple-15x15.png";
         }
     }
 

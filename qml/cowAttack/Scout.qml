@@ -130,7 +130,7 @@ Item {
 
     Image {
         id: beam
-        source: "../../gfx/beamsimple-48x200.png"
+        source: ":/gfx/beamsimple-48x200.png"
         opacity: 0
         Behavior on opacity { NumberAnimation { duration: 250 } }
         y: -floatHeight + shipPic.height * 3 / 4
@@ -140,7 +140,7 @@ Item {
 
     Image {
         id: shipPic
-        source: "../../gfx/cowmothership2-58x52.png"
+        source: ":/gfx/cowmothership2-58x52.png"
         y: -floatHeight + incy
         property int incy: 0
         z: 2
@@ -361,7 +361,7 @@ Item {
             delegate: Image {
                 width: 10
                 height: 13
-                source: "../../gfx/cowhead-10x13.png"
+                source: ":/gfx/cowhead-10x13.png"
             }
         }
     }
@@ -415,7 +415,7 @@ Item {
         onOpacityChanged: if (opacity == 1)
                               retrieveSound.play();
         Behavior on opacity { NumberAnimation { duration: 500 } }
-        source: "../../gfx/beamsimple-48x200.png"
+        source: ":/gfx/beamsimple-48x200.png"
         x: scout.width/2 - width/2
         y: -height - floatHeight + 38
         height: 100

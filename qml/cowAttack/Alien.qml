@@ -18,7 +18,7 @@ Item {
 
     Image {
         id: sprite
-        source: "../../gfx/alien-16x32-right.png"
+        source: ":/gfx/alien-16x32-right.png"
         Component.onCompleted: rectifyPosition()
     }
 
@@ -33,42 +33,42 @@ Item {
             name: "lookleft"
             PropertyChanges {
                 target: sprite
-                source: "../../gfx/alien-16x32-left.png"
+                source: ":/gfx/alien-16x32-left.png"
             }
         },
         State {
             name: "lookright"
             PropertyChanges {
                 target: sprite
-                source: "../../gfx/alien-16x32-right.png"
+                source: ":/gfx/alien-16x32-right.png"
             }
         },
         State {
             name: "lookup"
             PropertyChanges {
                 target: sprite
-                source: "../../gfx/alien-16x32-up.png"
+                source: ":/gfx/alien-16x32-up.png"
             }
         },
         State {
             name: "shootleft"
             PropertyChanges {
                 target: sprite
-                source: "../../gfx/alien-16x32-left-withgun.png"
+                source: ":/gfx/alien-16x32-left-withgun.png"
             }
         },
         State {
             name: "shootright"
             PropertyChanges {
                 target: sprite
-                source: "../../gfx/alien-16x32-right-withgun.png"
+                source: ":/gfx/alien-16x32-right-withgun.png"
             }
         },
         State {
             name: "shootup"
             PropertyChanges {
                 target: sprite
-                source: "../../gfx/alien-16x32-up-withgun.png"
+                source: ":/gfx/alien-16x32-up-withgun.png"
             }
         }
     ]
@@ -227,7 +227,7 @@ Item {
         parent: root
         width: 1
         height: 1
-        source: "../../gfx/lasershot-3x1.png"
+        source: ":/gfx/lasershot-3x1.png"
         lifeSpan: 1000
         count: 1
         emissionRate: 0

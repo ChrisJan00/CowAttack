@@ -18,13 +18,13 @@ Item {
         id: curtain
         width: parent.width
         height: parent.height + 400
-        source: "../../gfx/backgroundover-900x500-milk.png"
+        source: ":/gfx/backgroundover-900x500-milk.png"
         y: -height
     }
 
     Image {
         id: winPic
-        source: "../../gfx/cowfacehappy-340x420.png"
+        source: ":/gfx/cowfacehappy-340x420.png"
         anchors.centerIn: parent
         opacity: 0
     }

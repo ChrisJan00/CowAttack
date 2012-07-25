@@ -18,13 +18,13 @@ Item {
         id: curtain
         width: parent.width
         height: parent.height + 400
-        source: "../../gfx/backgroundover-900x500-darkness.png"
+        source: ":/gfx/backgroundover-900x500-darkness.png"
         y: -height
     }
 
     Image {
         id: losePic
-        source: "../../gfx/cowfaceohno-400x580.png"
+        source: ":/gfx/cowfaceohno-400x580.png"
         anchors.centerIn: parent
         opacity: 0
     }

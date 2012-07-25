@@ -1,0 +1,60 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/cowAttack/Alien.qml</file>
+        <file>qml/cowAttack/AliensManager.qml</file>
+        <file>qml/cowAttack/Cow.qml</file>
+        <file>qml/cowAttack/Grass.qml</file>
+        <file>qml/cowAttack/Light.qml</file>
+        <file>qml/cowAttack/LoseScreen.qml</file>
+        <file>qml/cowAttack/main.qml</file>
+        <file>qml/cowAttack/Mothership.qml</file>
+        <file>qml/cowAttack/Scout.qml</file>
+        <file>qml/cowAttack/ScoutShadow.qml</file>
+        <file>qml/cowAttack/Sky.qml</file>
+        <file>qml/cowAttack/SpaceshipManager.qml</file>
+        <file>qml/cowAttack/WinScreen.qml</file>
+
+        <file>gfx/alien-16x32-left.png</file>
+        <file>gfx/alien-16x32-up-withgun.png</file>
+        <file>gfx/beamsimple-48x200.png</file>
+        <file>gfx/cowfacehappy-340x420.png</file>
+        <file>gfx/lightyellow-15x15.png</file>
+        <file>gfx/alien-16x32-left-withgun.png</file>
+        <file>gfx/cow-48x32-left-eat1.png</file>
+        <file>gfx/cowfaceohno-400x580.png</file>
+        <file>gfx/lasershot-3x1.png</file>
+        <file>gfx/mothershadow.png</file>
+        <file>gfx/alien-16x32-right.png</file>
+        <file>gfx/backgroundover-900x500-darkness.png</file>
+        <file>gfx/cow-48x32-left-eat2.png</file>
+        <file>gfx/cowhead-10x13.png</file>
+        <file>gfx/leaf-8x15.png</file>
+        <file>gfx/alien-16x32-right-withgun.png</file>
+        <file>gfx/backgroundover-900x500-milk.png</file>
+        <file>gfx/cow-48x32-left.png</file>
+        <file>gfx/cowmothership2-58x52.png</file>
+        <file>gfx/cowscoutshadow-38x24-left.png</file>
+        <file>gfx/lightcyan-15x15.png</file>
+        <file>gfx/star-15x15.png</file>
+        <file>gfx/titlescreen.png</file>
+        <file>gfx/lightpurple-15x15.png</file>
+        <file>gfx/alien-16x32-up.png</file>
+        <file>gfx/cowmothership3-256x138.png</file>
+        <file>gfx/lightred-15x15.png</file>
+
+        <file>sfx/beam-down.ogg</file>
+        <file>sfx/beam-up.ogg</file>
+        <file>sfx/beam-wowowfast.ogg</file>
+        <file>sfx/beam-wowow.ogg</file>
+        <file>sfx/chewing.ogg</file>
+        <file>sfx/gameover-lose.ogg</file>
+        <file>sfx/gameover-win.ogg</file>
+        <file>sfx/gun-piu.ogg</file>
+        <file>sfx/gun-zap.ogg</file>
+        <file>sfx/ingamemusic.ogg</file>
+        <file>sfx/intromusic.ogg</file>
+        <file>sfx/moo-death.ogg</file>
+        <file>sfx/moo-massdeath.ogg</file>
+        <file>sfx/moo-notification.ogg</file>
+    </qresource>
+</RCC>

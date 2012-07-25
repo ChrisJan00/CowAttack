@@ -14,7 +14,7 @@ Rectangle {
         id: emitter
         width: parent.width
         height: parent.height
-        source: "../../gfx/leaf-8x15.png"
+        source: ":/gfx/leaf-8x15.png"
         lifeSpan: 20000
         lifeSpanDeviation: 10000
         count: 2000

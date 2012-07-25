@@ -43,7 +43,7 @@ Item {
         id: motherPic
         y: incy
         property int incy
-        source: "../../gfx/cowmothership3-256x138.png"
+        source: ":/gfx/cowmothership3-256x138.png"
 
         SequentialAnimation {
             id: floatAnimation

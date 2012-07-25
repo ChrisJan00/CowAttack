@@ -4,7 +4,7 @@ import SDLMixerWrapper 1.0
 
 Image {
     id: cow
-    source: "../../gfx/cow-48x32-left.png"
+    source: ":/gfx/cow-48x32-left.png"
 
     property bool pasturing: false
     property int pastureAmount: 0
@@ -131,21 +131,21 @@ Image {
             name: "normal"
             PropertyChanges {
                 target: cow
-                source: "../../gfx/cow-48x32-left.png"
+                source: ":/gfx/cow-48x32-left.png"
             }
         },
         State {
             name: "chew1"
             PropertyChanges {
                 target: cow
-                source: "../../gfx/cow-48x32-left-eat1.png"
+                source: ":/gfx/cow-48x32-left-eat1.png"
             }
         },
         State {
             name: "chew2"
             PropertyChanges {
                 target: cow
-                source: "../../gfx/cow-48x32-left-eat2.png"
+                source: ":/gfx/cow-48x32-left-eat2.png"
             }
         }
     ]

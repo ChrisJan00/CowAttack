@@ -78,7 +78,7 @@ Rectangle {
 
     Image {
         id: titleScreen
-        source: "../../gfx/titlescreen.png"
+        source: ":/gfx/titlescreen.png"
         anchors.fill: parent
         Behavior on opacity { NumberAnimation { duration: 1000 } }
         MouseArea {

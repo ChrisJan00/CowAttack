@@ -1,9 +1,7 @@
 # Add more folders to ship with the application, here
-folder_01.source = qml/cowAttack
-folder_01.target = qml
-folder_02.source = gfx
-folder_02.target = .
-DEPLOYMENTFOLDERS = folder_01 folder_02
+#folder_01.source = qml/cowAttack
+#folder_01.target = qml
+#DEPLOYMENTFOLDERS = folder_01 folder_02
 
 QT += declarative
 
@@ -27,7 +25,7 @@ symbian:TARGET.UID3 = 0xE258663B
 #symbian:DEPLOYMENT.installer_header = 0x2002CCCF
 
 # Allow network access on Symbian
-symbian:TARGET.CAPABILITY += NetworkServices
+#symbian:TARGET.CAPABILITY += NetworkServices
 
 # If your application uses the Qt Mobility libraries, uncomment the following
 # lines and add the respective components to the MOBILITY variable.
@@ -50,9 +48,20 @@ HEADERS += soundclip.h
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
-#OTHER_FILES += \
-#    qml/cowAttack/alien.qml \
-#    qml/cowAttack/cow.qml \
-#    qml/cowAttack/mothership.qml \
-#    qml/cowAttack/scout.qml \
-#    qml/cowAttack/spaceshipManager.qml \
+OTHER_FILES += \
+    qml/cowAttack/main.qml \
+    qml/cowAttack/Alien.qml \
+    qml/cowAttack/AliensManager.qml \
+    qml/cowAttack/Cow.qml \
+    qml/cowAttack/Grass.qml \
+    qml/cowAttack/Light.qml \
+    qml/cowAttack/LoseScreen.qml \
+    qml/cowAttack/Mothership.qml \
+    qml/cowAttack/Scout.qml \
+    qml/cowAttack/ScoutShadow.qml \
+    qml/cowAttack/Sky.qml \
+    qml/cowAttack/SpaceshipManager.qml \
+    qml/cowAttack/WinScreen.qml
+
+RESOURCES += \
+    cowAttack.qrc

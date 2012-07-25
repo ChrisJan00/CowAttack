@@ -20,7 +20,7 @@ Item {
 
     Image {
         id: motherShadow
-        source: "../../gfx/mothershadow.png"
+        source: ":/gfx/mothershadow.png"
         y: motherShip.y + 200
         x: motherShip.x
     }
