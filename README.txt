@@ -55,3 +55,12 @@ License: CC0 1.0 Universal <http://creativecommons.org/publicdomain/zero/1.0/>
  - drop (milk)
  - backgroundover screens
  - all sounds
+
+Music "Music Box Monster"
+Copyright 2012 FoxSynergy <http://opengameart.org/users/foxsynergy>
+License: Creative Commons Attribution 3.0 Universal <http://creativecommons.org/licenses/by/3.0/>
+Source: http://opengameart.org/content/music-box-monster
+ - ingamemusic
+Changes (by Iwan Gabovitch):
+ - intromusic has singing in it
+License of changes: Creative Commons Attribution 3.0 Universal <http://creativecommons.org/licenses/by/3.0/>
