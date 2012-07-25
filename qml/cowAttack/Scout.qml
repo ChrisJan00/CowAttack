@@ -20,7 +20,7 @@ Item {
     property bool docked: x == mothershipX && y == (mothershipY + floatHeight)
     property bool moving: x != destX || y != destY
 
-    property int lives: 1
+    property int lives: 5
     property bool finishing: false
 
     property bool ready: false
