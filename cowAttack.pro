@@ -8,7 +8,13 @@ QT += declarative
 macx {
   LIBS += -framework SDL
   LIBS += -framework SDL_mixer
-} else {
+}
+win32 {
+  LIBS += -L$$PWD/SDL/ -lSDL -lSDL_mixer
+#  PRE_TARGETDEPS += $$PWD/SDL/SDL.lib $$PWD/SDL/SDL_mixer.lib
+}
+
+unix {
   LIBS += -lSDL -lSDL_mixer
 }
 
