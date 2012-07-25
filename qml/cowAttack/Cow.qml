@@ -27,6 +27,12 @@ Image {
         volume: sfxVolume
     }
 
+    SoundClip {
+        id: satiatedSound
+        source: "sfx/moo-notification.ogg"
+        volume: sfxVolume
+    }
+
     Connections {
         target: root
         onCowIsShot: {
@@ -66,8 +72,10 @@ Image {
                 pastureAcc += 0.3;
                 if (pastureAmount < pastureMax)
                     pastureAmount += Math.min(pastureInc, pastureMax-pastureAmount);
-                if (pastureAmount >= pastureMax)
+                if (pastureAmount >= pastureMax) {
+                    satiatedSound.play();
                     pasturing = false;
+                }
             }
     }
 

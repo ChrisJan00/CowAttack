@@ -209,6 +209,9 @@ Item {
             }
         }
         if (nearestCow >= 0) {
+            if (move) {
+                targetSound.play();
+            }
             move = false;
             victimCow = nearestCow;
         }

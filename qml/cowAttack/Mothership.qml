@@ -22,12 +22,6 @@ Item {
     }
 
     SoundClip {
-        id: zapSound
-        source: "sfx/gun-zap.ogg"
-        volume: sfxVolume
-    }
-
-    SoundClip {
         id: leavingSound
         source: "sfx/beam-wowowfast.ogg"
         volume: sfxVolume

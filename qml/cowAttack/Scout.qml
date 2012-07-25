@@ -49,12 +49,6 @@ Item {
     }
 
     SoundClip {
-        id: zapSound
-        source: "sfx/gun-zap.ogg"
-        volume: sfxVolume
-    }
-
-    SoundClip {
         id: deploySound
         source: "sfx/beam-down.ogg"
         volume: sfxVolume
