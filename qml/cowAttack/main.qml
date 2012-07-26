@@ -27,6 +27,9 @@ Rectangle {
     property int heartBeat: 100
     property int sfxVolume: 32
 
+    property variant startTime;
+    property variant elapsedTime;
+
 
     MusicClip {
         id: introMusic
@@ -38,6 +41,11 @@ Rectangle {
         id: ingameMusic
         source: "sfx/ingamemusic.ogg"
         loops: -1
+    }
+
+    FontLoader {
+        id: customFont
+        source: ":/Adventure.ttf"
     }
 
 
@@ -101,6 +109,7 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             onClicked: {
+                root.startTime = new Date().getTime();
                 titleScreen.opacity = 0;
                 introMusic.repeating = false;
             }

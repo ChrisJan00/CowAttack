@@ -60,5 +60,7 @@
         <file>sfx/explosion-big.ogg</file>
         <file>sfx/explosion-small.ogg</file>
         <file>sfx/targeting.ogg</file>
+
+	<file>Adventure.ttf</file>
     </qresource>
 </RCC>

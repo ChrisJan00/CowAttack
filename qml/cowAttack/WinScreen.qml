@@ -44,6 +44,25 @@ Item {
         opacity: 0
     }
 
+    Text {
+        id: timeText
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: winPic.bottom
+        anchors.topMargin: 12
+        opacity: winPic.opacity
+        font.family: customFont.name
+        font.pixelSize: 32
+        text: {
+            var hours = Math.floor(root.elapsedTime / 60000 / 60);
+            var mins = Math.floor(root.elapsedTime / 60000 - hours * 60);
+            var secs = Math.floor(root.elapsedTime  / 1000 - mins * 60);
+            return "Total time  " +
+                    (hours > 0? hours + ":" : "") +
+                    (mins < 10 ? "0" : "") + mins + ":" +
+                    (secs < 10 ? "0" : "") + secs;
+        }
+    }
+
     MouseArea {
         id: mouseEater
         anchors.fill: parent
@@ -51,6 +70,7 @@ Item {
     }
 
     function show() {
+        root.elapsedTime = new Date().getTime() - root.startTime;
         mouseEater.enabled = true;
         endAnimation.start();
         if (introMusic.playing) {

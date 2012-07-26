@@ -44,6 +44,27 @@ Item {
         source: ":/gfx/cowfaceohno-400x580.png"
         anchors.centerIn: parent
         opacity: 0
+        scale: 0.7
+    }
+
+    Text {
+        id: timeText
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: losePic.bottom
+        anchors.topMargin: -64
+        opacity: losePic.opacity
+        font.family: customFont.name
+        font.pixelSize: 32
+        color: "white"
+        text: {
+            var hours = Math.floor(root.elapsedTime / 60000 / 60);
+            var mins = Math.floor(root.elapsedTime / 60000 - hours * 60);
+            var secs = Math.floor(root.elapsedTime  / 1000 - mins * 60);
+            return "Total time  " +
+                    (hours > 0? hours + ":" : "") +
+                    (mins < 10 ? "0" : "") + mins + ":" +
+                    (secs < 10 ? "0" : "") + secs;
+        }
     }
 
     MouseArea {
@@ -53,6 +74,7 @@ Item {
     }
 
     function show() {
+        root.elapsedTime = new Date().getTime() - root.startTime;
         mouseEater.enabled = true;
         endAnimation.start();
         if (introMusic.playing) {
