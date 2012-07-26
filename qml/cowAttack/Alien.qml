@@ -24,9 +24,13 @@ Item {
     id: alien
 
     property int alienIndex;
-    property int speedX: 0;
-    property int speedY: 0;
+    property real speedX: 0;
+    property real speedY: 0;
+    property real posx;
+    property real posy;
     property bool move: true;
+    property bool wasMoving: false;
+    property bool speedUpdate: true;
     property int victimCow: -1
     property bool wasLookingLeft: false
 
@@ -36,7 +40,7 @@ Item {
     Image {
         id: sprite
         source: ":/gfx/alien-16x32-right.png"
-        Component.onCompleted: rectifyPosition()
+        Component.onCompleted: rectifyPosition();
     }
 
     SoundClip {
@@ -96,8 +100,17 @@ Item {
         }
     ]
 
+    x: posx
+    y: posy
+    Behavior on x { NumberAnimation { duration: heartBeat } }
+    Behavior on y { NumberAnimation { duration: heartBeat } }
+
     function updateSprite() {
         if (move) {
+            if (!speedUpdate && wasMoving)
+                return;
+            wasMoving = true;
+            speedUpdate = false;
             if (speedY < 0) {
                 state = "lookup";
                 return;
@@ -119,15 +132,20 @@ Item {
                 return;
             var cowAngle = getCowAngle(victimCow);
 
+            // skip tests if I'm already shooting
+            if (!wasMoving)
+                return;
+            wasMoving = false;
+
             if (cowAngle <= -45 && cowAngle >= -135) {
                 state = "shootup";
                 return;
             }
-            if (cowPositions.get(victimCow).x < alien.x) {
+            if (cowPositions.get(victimCow).x < alien.posx) {
                 state = "shootleft";
                 return;
             }
-            if (cowPositions.get(victimCow).x > alien.x) {
+            if (cowPositions.get(victimCow).x > alien.posx) {
                 state = "shootright";
                 return;
             }
@@ -141,8 +159,8 @@ Item {
             updateSprite();
             return;
         }
-        x += speedX;
-        y += speedY;
+        posx += speedX;
+        posy += speedY;
         rectifyPosition();
         updateSprite();
     }
@@ -151,6 +169,7 @@ Item {
     function rectifyPosition() {
         if (!alreadyChanged && isInNode()) {
             alreadyChanged = true;
+            speedUpdate = true;
             switch (Math.floor(Math.random()*4)) {
             case 0: {
                 speedX = alienSpeed;
@@ -177,44 +196,52 @@ Item {
 
         if (!isInNode())
             alreadyChanged = false;
-        if ((x + sprite.width) > aliensManager.rightBound) {
-            x = aliensManager.rightBound - sprite.width;
+        if ((posx + sprite.width) > aliensManager.rightBound) {
+            posx = aliensManager.rightBound - sprite.width;
             speedX = -alienSpeed;
             speedY = 0;
+            speedUpdate = true;
         }
-        if ((y + sprite.height) > aliensManager.bottomBound) {
-            y = aliensManager.bottomBound - sprite.height;
+        if ((posy + sprite.height) > aliensManager.bottomBound) {
+            posy = aliensManager.bottomBound - sprite.height;
             speedY = -alienSpeed;
             speedX = 0;
+            speedUpdate = true;
         }
 
-        if (x < aliensManager.leftBound) {
-            x = aliensManager.leftBound;
+        if (posx < aliensManager.leftBound) {
+            posx = aliensManager.leftBound;
             speedX = alienSpeed;
             speedY = 0;
+            speedUpdate = true;
         }
-        if (y < aliensManager.topBound) {
-            y = aliensManager.topBound;
+        if (posy < aliensManager.topBound) {
+            posy = aliensManager.topBound;
             speedY = alienSpeed;
             speedX = 0;
+            speedUpdate = true;
         }
     }
 
     function isInNode() {
         var tolerance = 10
-        if (x % Math.floor(grass.width / aliensManager.arrayCountX) < tolerance && (y - grass.y) % Math.floor(grass.height / aliensManager.arrayCountY) < tolerance)
+        if (posx % Math.floor(grass.width / aliensManager.arrayCountX) < tolerance && (posy - grass.y) % Math.floor(grass.height / aliensManager.arrayCountY) < tolerance)
             return true;
         return false;
     }
 
     function checkDistanceFromCowScouts() {
+        // skip test if I'm already shooting
+        if (!move && victimCow != -1 && cowPositions.get(victimCow).active)
+            return;
+
         var distanceToCowScout = aliensManager.thresholdDistance;
         var nearestCow = -1;
         for (var i = 0; i < cowPositions.count; ++i) {
             var cowPosition = cowPositions.get(i);
             if (cowPosition.active) {
-                var distance = Math.pow(cowPosition.x - x - width/2, 2) +
-                        Math.pow(cowPosition.y - y - height/2, 2);
+                var distance = Math.pow(cowPosition.x - posx - width/2, 2) +
+                        Math.pow(cowPosition.y - posy - height/2, 2);
                 if (distance < distanceToCowScout) {
                     distanceToCowScout = distance
                     nearestCow = i;
@@ -232,9 +259,23 @@ Item {
             move = true;
     }
 
-    Connections {
-        target: aliensManager
-        onUpdateAlienPositions: updatePosition()
+//    Connections {
+//        target: aliensManager
+//        onUpdateAlienPositions: updatePosition()
+//    }
+    Timer {
+        id: synchronizer
+        repeat: false
+        running: true
+        interval: alienIndex * heartBeat / alienCount
+        onTriggered: heartTimer.start();
+    }
+    Timer {
+        id: heartTimer
+        interval: heartBeat
+        running: false
+        repeat: true
+        onTriggered: updatePosition()
     }
 
     Component.onCompleted: {
@@ -266,8 +307,8 @@ Item {
         onTriggered: {
             if (!cowPositions.get(victimCow).active)
                 return;
-            emitter.x = x + width/2;
-            emitter.y = y + height/2;
+            emitter.x = posx + width/2;
+            emitter.y = posy + height/2;
             emitter.rotation = getCowAngle(victimCow);
             emitter.burst(1);
             root.whichCow = victimCow
@@ -280,9 +321,9 @@ Item {
     {
         var cowX = cowPositions.get(cowIndex).x;
         var cowY = cowPositions.get(cowIndex).y;
-        if (cowX != x)
-            return Math.atan2(cowY - y - alien.height/2, cowX - x - alien.width/2) * 180/ Math.PI;
+        if (cowX != posx)
+            return Math.atan2(cowY - posy - alien.height/2, cowX - posx - alien.width/2) * 180/ Math.PI;
         else
-            return cowY < y? 0 : 180;
+            return cowY < posy? 0 : 180;
     }
 }

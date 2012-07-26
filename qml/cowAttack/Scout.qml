@@ -30,6 +30,7 @@ Item {
     property int destY: y
     property int floatHeight: 100
     property bool cowSpawned: false
+    property real stepSize: heartBeat / 10
 
     property int energy: 0
     property int energyMax: 800
@@ -99,11 +100,12 @@ Item {
         }
 
         onUpdateSpaceships: {
-            var stepSize = 10
-            var incx = Math.min(stepSize, Math.max(-stepSize, destX - x) );
-            var incy = Math.min(stepSize, Math.max(-stepSize, destY - y) );
-            x += incx;
-            y += incy;
+            if (destX != x || destY != y) {
+                var incx = Math.min(stepSize, Math.max(-stepSize, destX - x) );
+                var incy = Math.min(stepSize, Math.max(-stepSize, destY - y) );
+                x += incx;
+                y += incy;
+            }
         }
 
         onRecallShip: {

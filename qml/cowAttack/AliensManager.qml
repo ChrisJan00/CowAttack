@@ -22,30 +22,34 @@ import QtQuick 1.1
 Item {
     id: aliensManager
 
-    signal updateAlienPositions
+//    signal updateAlienPositions
 
     property int alienCount: 25
     property int arrayCountX: 10
     property int arrayCountY: 5
-    property double alienSpeed: 2.5
+    property real alienSpeed: heartBeat / 40.0
     property int leftBound: 0
     property int rightBound: root.width
     property int topBound: grass.y
     property int bottomBound: root.height
 
     property double thresholdDistance : 5000
-    Timer {
-        id: updateTimer
-        interval: heartBeat; running: true; repeat: true
-        onTriggered: updateAlienPositions()
-    }
+
+    // We will do a different trick: each alien will have its
+    // own heart, synchronized in a way that the aliens are
+    // updated in sequence, instead of all at the same hearbeat
+//    Timer {
+//        id: updateTimer
+//        interval: heartBeat; running: true; repeat: true
+//        onTriggered: updateAlienPositions()
+//    }
 
     Repeater {
         model: alienCount
         delegate: Alien {
             alienIndex: index
-            x: Math.floor((index%(arrayCountX+1))/arrayCountX*grass.width)
-            y: Math.floor((Math.floor(index/arrayCountX))/arrayCountY*grass.height + grass.y)
+            posx: Math.floor((index%(arrayCountX+1))/arrayCountX*grass.width)
+            posy: Math.floor((Math.floor(index/arrayCountX))/arrayCountY*grass.height + grass.y)
             speedX: (index%2) * alienSpeed; speedY: ((index+1)%2) * alienSpeed
         }
     }
