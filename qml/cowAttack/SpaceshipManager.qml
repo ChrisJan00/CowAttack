@@ -46,14 +46,23 @@ Item {
         id: scoutControl
         x: 19
         y: grass.y
-        width: grass.width - 38
-        height: grass.height - 12
+        width: grass.width
+        height: grass.height
         property int ylimit : grass.y
         onClicked: {
             destX = mouseX - 14;
             destY = mouseY + y - 32;
             if (destY < ylimit)
                 destY = ylimit;
+            if (destY > root.height - 48)
+                destY = root.height - 48;
+            if (destX > grass.width - 38)
+                destX = grass.width - 38;
+
+            // avoid going behind the mothership
+            if (destX >= motherShadow.x - 38 && destX <= motherShadow.x+motherShadow.width && destY < motherShadow.y + motherShadow.height/2)
+                destY = motherShadow.y + motherShadow.height/2;
+
             moveScout();
         }
     }
