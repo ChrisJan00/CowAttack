@@ -14,7 +14,7 @@ win32 {
 #  PRE_TARGETDEPS += $$PWD/SDL/SDL.lib $$PWD/SDL/SDL_mixer.lib
 }
 
-unix {
+linux-g++ {
   LIBS += -lSDL -lSDL_mixer
 }
 
