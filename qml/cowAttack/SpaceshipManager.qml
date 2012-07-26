@@ -44,20 +44,23 @@ Item {
 
     MouseArea {
         id: scoutControl
-        x: 19
+        x: 0
         y: grass.y
         width: grass.width
         height: grass.height
-        property int ylimit : grass.y
+        property int ylimit : grass.y - 16
         onClicked: {
-            destX = mouseX - 14;
+            destX = mouseX - 29;
             destY = mouseY + y - 32;
+
             if (destY < ylimit)
                 destY = ylimit;
             if (destY > root.height - 48)
                 destY = root.height - 48;
-            if (destX > grass.width - 38)
-                destX = grass.width - 38;
+            if (destX > grass.width - 58)
+                destX = grass.width - 58;
+            if (destX < 0)
+                destX = 0;
 
             // avoid going behind the mothership
             if (destX >= motherShadow.x - 38 && destX <= motherShadow.x+motherShadow.width && destY < motherShadow.y + motherShadow.height/2)

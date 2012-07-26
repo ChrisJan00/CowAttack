@@ -33,7 +33,7 @@ Item {
     property int topBound: grass.y
     property int bottomBound: root.height
 
-    property double thresholdDistance : 6000
+    property double thresholdDistance : 5000
     Timer {
         id: updateTimer
         interval: heartBeat; running: true; repeat: true

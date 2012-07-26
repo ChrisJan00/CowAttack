@@ -32,7 +32,7 @@ Item {
     property bool cowSpawned: false
 
     property int energy: 0
-    property int energyMax: 1000
+    property int energyMax: 800
 
     property bool docked: x == mothershipX && y == (mothershipY + floatHeight)
     property bool moving: x != destX || y != destY
@@ -318,7 +318,7 @@ Item {
     }
 
     function deployCow() {
-        if (scout.y < grass.y)
+        if (scout.y < grass.y - 16)
             return;
         if (destX != x || destY != y)
             return;

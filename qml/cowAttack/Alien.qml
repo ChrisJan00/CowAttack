@@ -153,25 +153,21 @@ Item {
             alreadyChanged = true;
             switch (Math.floor(Math.random()*4)) {
             case 0: {
-//                console.log("0")
                 speedX = alienSpeed;
                 speedY = 0;
                 break;
             }
             case 1: {
-//                console.log("1")
                 speedX = -alienSpeed;
                 speedY = 0;
                 break;
             }
             case 2: {
-//                console.log("2")
                 speedX = 0;
                 speedY = alienSpeed;
                 break;
             }
             case 3: {
-//                console.log("3")
                 speedX = 0;
                 speedY = -alienSpeed;
                 break;
@@ -217,8 +213,8 @@ Item {
         for (var i = 0; i < cowPositions.count; ++i) {
             var cowPosition = cowPositions.get(i);
             if (cowPosition.active) {
-                var distance = Math.pow(cowPosition.x - x, 2) +
-                        Math.pow(cowPosition.y - y, 2);
+                var distance = Math.pow(cowPosition.x - x - width/2, 2) +
+                        Math.pow(cowPosition.y - y - height/2, 2);
                 if (distance < distanceToCowScout) {
                     distanceToCowScout = distance
                     nearestCow = i;

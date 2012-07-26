@@ -25,7 +25,7 @@ Image {
 
     property bool pasturing: false
     property int pastureAmount: 0
-    property int pastureMax: 300
+    property int pastureMax: 250
     property int pastureInc: 1
     property int pastureAcc: 1
     property bool dying: false

@@ -25,7 +25,7 @@ Item {
     width: motherPic.width
 
     property int milk: 0
-    property int milkMax: 7000
+    property int milkMax: 2500
 
     onMilkChanged: if (milk > milkMax) {
                        milk = milkMax;
